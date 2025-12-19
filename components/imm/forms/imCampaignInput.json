@@ -1,0 +1,306 @@
+{
+  "className": "org.joget.apps.form.model.Form",
+  "properties": {
+    "id": "imCampaignInput",
+    "name": "Campaign Input Configuration",
+    "tableName": "imCampaignInput",
+    "description": "Defines inputs available in a campaign and their allocation parameters",
+    "loadBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "storeBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "noPermissionMessage": "",
+    "postProcessorRunOn": "create",
+    "permission": {
+      "className": "",
+      "properties": {}
+    },
+    "postProcessor": {
+      "className": "",
+      "properties": {}
+    }
+  },
+  "elements": [
+    {
+      "className": "org.joget.apps.form.model.Section",
+      "properties": {
+        "id": "section1",
+        "label": "Section"
+      },
+      "elements": [
+        {
+          "className": "org.joget.apps.form.model.Column",
+          "properties": {
+            "width": "100%"
+          },
+          "elements": [
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "id",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "campaignId",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "inputCode",
+                "label": "Input",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "md44Input",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Select Input --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "inputCategory",
+                "label": "Category",
+                "required": "",
+                "readonly": "true",
+                "value": "",
+                "size": "small",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "totalQtyAvailable",
+                "label": "Total Quantity Available",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.MultiValidator",
+                  "properties": {
+                    "validators": [
+                      {
+                        "className": "org.joget.apps.form.lib.DefaultValidator",
+                        "properties": {
+                          "mandatory": "true"
+                        }
+                      },
+                      {
+                        "className": "org.joget.apps.form.lib.RegexValidator",
+                        "properties": {
+                          "regex": "^[0-9]+(\\.[0-9]{1,2})?$",
+                          "message": "Enter a valid quantity"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "unit",
+                "label": "Unit",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "kg",
+                        "label": "Kilograms (kg)"
+                      },
+                      {
+                        "value": "litre",
+                        "label": "Litres (L)"
+                      },
+                      {
+                        "value": "packet",
+                        "label": "Packets"
+                      },
+                      {
+                        "value": "piece",
+                        "label": "Pieces"
+                      },
+                      {
+                        "value": "dose",
+                        "label": "Doses"
+                      },
+                      {
+                        "value": "bag",
+                        "label": "Bags (50kg)"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "allocationBasis",
+                "label": "Allocation Basis",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "md41AllocBasis",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Select --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "allocationRate",
+                "label": "Allocation Rate",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "e.g., 10 (kg per hectare)",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "minPerFarmer",
+                "label": "Min per Farmer",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "maxPerFarmer",
+                "label": "Max per Farmer",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "subsidyRatePct",
+                "label": "Subsidy Rate (%)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "e.g., 80",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "farmerContribution",
+                "label": "Farmer Co-Payment",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0.00",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "ceilingPrice",
+                "label": "Ceiling Price (per unit)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0.00",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Please enter numbers only"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "qtyAllocated",
+                "label": "Qty Allocated",
+                "required": "",
+                "readonly": "true",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "qtyDistributed",
+                "label": "Qty Distributed",
+                "required": "",
+                "readonly": "true",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "generator": "joget-form-generator",
+    "version": "0.1.0",
+    "field_count": 1
+  }
+}

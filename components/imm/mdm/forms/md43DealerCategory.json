@@ -1,0 +1,224 @@
+{
+  "className": "org.joget.apps.form.model.Form",
+  "properties": {
+    "id": "md43DealerCategory",
+    "name": "Dealer Category",
+    "tableName": "md43DealerCategory",
+    "description": "Categories/tiers of agro-dealers",
+    "loadBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "storeBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "noPermissionMessage": "",
+    "postProcessorRunOn": "create",
+    "permission": {
+      "className": "",
+      "properties": {}
+    },
+    "postProcessor": {
+      "className": "",
+      "properties": {}
+    }
+  },
+  "elements": [
+    {
+      "className": "org.joget.apps.form.model.Section",
+      "properties": {
+        "id": "section1",
+        "label": "Section"
+      },
+      "elements": [
+        {
+          "className": "org.joget.apps.form.model.Column",
+          "properties": {
+            "width": "100%"
+          },
+          "elements": [
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "id",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "code",
+                "label": "Code",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "30",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "name",
+                "label": "Name",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "description",
+                "label": "Description",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "rows": "2",
+                "cols": "50",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "minStorageSqm",
+                "label": "Min Storage (sqm)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "minCapital",
+                "label": "Min Capital",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0.00",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "requiresLicense",
+                "label": "Requires Trading License",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "allowedCategories",
+                "label": "Allowed Input Categories",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "200",
+                "placeholder": "e.g., SEED;FERTILIZER",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "commissionRatePct",
+                "label": "Commission Rate (%)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "e.g., 10",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "sortOrder",
+                "label": "Sort Order",
+                "required": "",
+                "readonly": "",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "isActive",
+                "label": "Active",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "generator": "joget-form-generator",
+    "version": "0.1.0",
+    "field_count": 1
+  }
+}

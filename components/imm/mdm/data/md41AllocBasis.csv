@@ -1,0 +1,7 @@
+code,name,description,calculationUnit,requiresFarmerData,formula,sortOrder,isActive
+PER_HA,Per Hectare,Allocation based on cultivated land area,hectare,Y,land_hectares * rate,1,Y
+PER_FARMER,Per Farmer,Fixed allocation per registered farmer,farmer,N,fixed_amount,2,Y
+PER_HEAD,Per Livestock Head,Allocation based on livestock count,head,Y,livestock_count * rate,3,Y
+PACKAGE,Fixed Package,Pre-defined input package,package,N,package_value,4,Y
+BUDGET,Budget-Based,Allocation based on currency amount,currency,N,budget_amount,5,Y
+NEED_BASED,Needs Assessment,Based on assessed farmer needs,farmer,Y,assessed_need * rate,6,Y

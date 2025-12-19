@@ -1,0 +1,7 @@
+code,name,description,priorityWeight,eligibilityCriteria,sortOrder,isActive
+SMALL,Smallholder Farmers,Farmers with less than 2 hectares,1.5,Land area < 2 hectares,1,Y
+VULNERABLE,Vulnerable Households,Female-headed or elderly households,1.8,Female-headed OR age > 60,2,Y
+YOUTH,Youth Farmers,Young farmers aged 18-35,1.3,Age between 18 and 35,3,Y
+EMERGING,Emerging Farmers,Small commercial farmers 2-10 ha,1.0,Land area between 2 and 10 hectares,4,Y
+COOP_MEMBER,Cooperative Members,Registered cooperative members,1.2,Active cooperative membership,5,Y
+NEW_ENTRANT,New Entrants,First-time farming households,1.4,No previous farming registration,6,Y

@@ -1,0 +1,7 @@
+code,name,description,requiresVoucher,requiresDealer,requiresVerification,allowPartial,sortOrder,isActive
+DIRECT,Direct Distribution,Government-run distribution points,N,N,Y,N,1,Y
+EVOUCHER,E-Voucher,Electronic voucher redeemable at dealers,Y,Y,Y,Y,2,Y
+DEALER,Dealer Network,Distribution through agro-dealers,N,Y,Y,Y,3,Y
+COOP,Cooperative,Distribution via farmer cooperatives,N,N,Y,N,4,Y
+MOBILE,Mobile Distribution,Mobile units reaching remote areas,N,N,Y,N,5,Y
+HYBRID,Hybrid Model,Combination of direct and dealer,Y,Y,Y,Y,6,Y

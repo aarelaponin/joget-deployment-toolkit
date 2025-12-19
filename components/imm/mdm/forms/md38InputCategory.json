@@ -1,0 +1,248 @@
+{
+  "className": "org.joget.apps.form.model.Form",
+  "properties": {
+    "id": "md38InputCategory",
+    "name": "Input Category",
+    "tableName": "md38InputCategory",
+    "description": "Categories for agricultural inputs (Seeds, Fertilizers, etc.)",
+    "loadBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "storeBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "noPermissionMessage": "",
+    "postProcessorRunOn": "create",
+    "permission": {
+      "className": "",
+      "properties": {}
+    },
+    "postProcessor": {
+      "className": "",
+      "properties": {}
+    }
+  },
+  "elements": [
+    {
+      "className": "org.joget.apps.form.model.Section",
+      "properties": {
+        "id": "section1",
+        "label": "Section"
+      },
+      "elements": [
+        {
+          "className": "org.joget.apps.form.model.Column",
+          "properties": {
+            "width": "100%"
+          },
+          "elements": [
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "id",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "code",
+                "label": "Category Code",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "30",
+                "placeholder": "e.g., SEED",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "name",
+                "label": "Category Name",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "placeholder": "e.g., Seeds",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "description",
+                "label": "Description",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "rows": "2",
+                "cols": "50",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "requiresBatchTrack",
+                "label": "Requires Batch Tracking",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "hasExpiryDate",
+                "label": "Has Expiry Date",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "requiresLicense",
+                "label": "Requires Dealer License",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "coldChainRequired",
+                "label": "Cold Chain Required",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "sortOrder",
+                "label": "Sort Order",
+                "required": "",
+                "readonly": "",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "isActive",
+                "label": "Active",
+                "required": "true",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "generator": "joget-form-generator",
+    "version": "0.1.0",
+    "field_count": 1
+  }
+}

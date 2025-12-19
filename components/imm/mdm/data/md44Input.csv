@@ -1,0 +1,11 @@
+code,name,categoryCode,description,unitOfMeasure,packageSize,shelfLifeMonths,storageRequirements,ceilingPrice,defaultSubsidyPct,requiresLicense,coldChainRequired,batchTracking,manufacturer,isActive
+MAIZE_SC513,Maize Seed SC513,SEED,High-yield hybrid maize seed,kg,25,12,DRY_COOL,850.00,80,N,N,Y,SeedCo,Y
+MAIZE_PAN53,Maize Seed PAN53,SEED,Drought-tolerant maize variety,kg,25,12,DRY_COOL,820.00,80,N,N,Y,Pannar,Y
+BEAN_SUGAR,Sugar Bean Seed,SEED,High protein bean variety,kg,10,12,DRY,650.00,75,N,N,Y,Local Seed Co,Y
+FERT_UREA,Urea 46% N,FERT,Nitrogen fertilizer,kg,50,24,DRY,450.00,70,N,N,Y,Various,Y
+FERT_COMP,Compound D (10-20-10),FERT,Basal compound fertilizer,kg,50,24,DRY,520.00,70,N,N,Y,Various,Y
+FERT_AN,Ammonium Nitrate 34%,FERT,Top dressing fertilizer,kg,50,24,DRY,480.00,70,N,N,Y,Various,Y
+PEST_CARB,Carbaryl 85% WP,PEST,Contact insecticide,kg,1,36,DRY_COOL,180.00,60,Y,N,Y,Bayer,Y
+HERB_GLYPHO,Glyphosate 480 SL,HERB,Non-selective herbicide,litre,5,36,DRY,95.00,50,Y,N,Y,Various,Y
+TOOL_HOE,Hand Hoe,TOOL,Standard farming hoe,piece,1,,DRY,85.00,50,N,N,N,Local,Y
+TOOL_SPRAYER,Knapsack Sprayer 16L,TOOL,Manual backpack sprayer,piece,1,,DRY,650.00,40,N,N,N,Various,Y

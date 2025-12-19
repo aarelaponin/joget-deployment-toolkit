@@ -1,0 +1,397 @@
+{
+  "className": "org.joget.apps.form.model.Form",
+  "properties": {
+    "id": "md45DistribPoint",
+    "name": "Distribution Point",
+    "tableName": "md45DistribPoint",
+    "description": "Locations where inputs are distributed to farmers",
+    "loadBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "storeBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "noPermissionMessage": "",
+    "postProcessorRunOn": "create",
+    "permission": {
+      "className": "",
+      "properties": {}
+    },
+    "postProcessor": {
+      "className": "",
+      "properties": {}
+    }
+  },
+  "elements": [
+    {
+      "className": "org.joget.apps.form.model.Section",
+      "properties": {
+        "id": "section1",
+        "label": "Section"
+      },
+      "elements": [
+        {
+          "className": "org.joget.apps.form.model.Column",
+          "properties": {
+            "width": "100%"
+          },
+          "elements": [
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "id",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "code",
+                "label": "Point Code",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "30",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "name",
+                "label": "Point Name",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "pointType",
+                "label": "Point Type",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "DEPOT",
+                        "label": "Main Depot"
+                      },
+                      {
+                        "value": "SUB_DEPOT",
+                        "label": "Sub-Depot"
+                      },
+                      {
+                        "value": "EXTENSION",
+                        "label": "Extension Office"
+                      },
+                      {
+                        "value": "AGRO_DEALER",
+                        "label": "Agro-Dealer"
+                      },
+                      {
+                        "value": "COOPERATIVE",
+                        "label": "Cooperative"
+                      },
+                      {
+                        "value": "MOBILE",
+                        "label": "Mobile Unit"
+                      },
+                      {
+                        "value": "COLLECTION",
+                        "label": "Collection Point"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "districtCode",
+                "label": "District",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "mdDistrict",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Select District --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "councilCode",
+                "label": "Council/Community",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "village",
+                "label": "Village",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "physicalAddress",
+                "label": "Physical Address",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "rows": "2",
+                "cols": "50",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "gpsLatitude",
+                "label": "GPS Latitude",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "-29.3167",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "gpsLongitude",
+                "label": "GPS Longitude",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "27.4833",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "capacityFarmersDay",
+                "label": "Capacity (farmers/day)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "storageTonnes",
+                "label": "Storage Capacity (tonnes)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "hasColdStorage",
+                "label": "Has Cold Storage",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "contactPerson",
+                "label": "Contact Person",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "contactPhone",
+                "label": "Contact Phone",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "20",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "type": "regex",
+                    "regex": "^[+]?[0-9\\s\\-()]+$",
+                    "message": "Please enter a valid phone number"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "contactEmail",
+                "label": "Contact Email",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "type": "regex",
+                    "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                    "message": "Please enter a valid email address"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "operatingHours",
+                "label": "Operating Hours",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "placeholder": "Mon-Fri 08:00-16:00",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "linkedDealerId",
+                "label": "Linked Dealer (if applicable)",
+                "required": "",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "imAgroDealer",
+                    "idColumn": "id",
+                    "labelColumn": "dealerName",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Not linked --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "isActive",
+                "label": "Active",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "generator": "joget-form-generator",
+    "version": "0.1.0",
+    "field_count": 1
+  }
+}

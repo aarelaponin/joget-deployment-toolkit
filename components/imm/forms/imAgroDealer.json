@@ -1,0 +1,1060 @@
+{
+  "className": "org.joget.apps.form.model.Form",
+  "properties": {
+    "id": "imAgroDealer",
+    "name": "Agro-Dealer Registration",
+    "tableName": "imAgroDealer",
+    "description": "Registration and management of agricultural input dealers in the distribution network",
+    "loadBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "storeBinder": {
+      "className": "org.joget.apps.form.lib.WorkflowFormBinder",
+      "properties": {}
+    },
+    "noPermissionMessage": "",
+    "postProcessorRunOn": "create",
+    "permission": {
+      "className": "",
+      "properties": {}
+    },
+    "postProcessor": {
+      "className": "",
+      "properties": {}
+    }
+  },
+  "elements": [
+    {
+      "className": "org.joget.apps.form.model.Section",
+      "properties": {
+        "id": "section1",
+        "label": "Section"
+      },
+      "elements": [
+        {
+          "className": "org.joget.apps.form.model.Column",
+          "properties": {
+            "width": "100%"
+          },
+          "elements": [
+            {
+              "className": "org.joget.apps.form.lib.HiddenField",
+              "properties": {
+                "id": "id",
+                "value": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.IdGeneratorField",
+              "properties": {
+                "id": "dealerCode",
+                "label": "Dealer Code",
+                "value": "",
+                "readonly": "true",
+                "format": "{prefix}{count:04d}",
+                "prefix": "AD-",
+                "postfix": "",
+                "environmentVariable": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "businessSection",
+                "label": "Business Information",
+                "value": "<h4>Business Details</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "businessName",
+                "label": "Business Name",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "large",
+                "maxlength": "200",
+                "placeholder": "Registered business name",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "businessRegNo",
+                "label": "Business Registration Number",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "placeholder": "Company registration number",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Please enter numbers only"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "taxId",
+                "label": "Tax Identification Number",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "placeholder": "TIN",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Please enter numbers only"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "dealerCategory",
+                "label": "Dealer Category",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "md43DealerCategory",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Select Category --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "businessDescription",
+                "label": "Business Description",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "rows": "3",
+                "cols": "50",
+                "placeholder": "Brief description of business activities",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "ownerSection",
+                "label": "Owner Information",
+                "value": "<h4>Owner / Proprietor Details</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "ownerName",
+                "label": "Owner Full Name",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "200",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "ownerNationalId",
+                "label": "Owner National ID",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.MultiValidator",
+                  "properties": {
+                    "validators": [
+                      {
+                        "className": "org.joget.apps.form.lib.DefaultValidator",
+                        "properties": {
+                          "mandatory": "true"
+                        }
+                      },
+                      {
+                        "className": "org.joget.apps.form.lib.RegexValidator",
+                        "properties": {
+                          "regex": "^[A-Z0-9-]+$",
+                          "message": "Enter a valid national ID"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "ownerGender",
+                "label": "Owner Gender",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "M",
+                        "label": "Male"
+                      },
+                      {
+                        "value": "F",
+                        "label": "Female"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "ownerPhone",
+                "label": "Owner Phone",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "20",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^\\+?[0-9]{8,15}$",
+                    "message": "Enter a valid phone number"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "ownerEmail",
+                "label": "Owner Email",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                    "message": "Enter a valid email address"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "contactSection",
+                "label": "Contact Information",
+                "value": "<h4>Business Contact Details</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "contactPerson",
+                "label": "Contact Person",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "200",
+                "placeholder": "If different from owner",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "phonePrimary",
+                "label": "Primary Phone",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "20",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.MultiValidator",
+                  "properties": {
+                    "validators": [
+                      {
+                        "className": "org.joget.apps.form.lib.DefaultValidator",
+                        "properties": {
+                          "mandatory": "true"
+                        }
+                      },
+                      {
+                        "className": "org.joget.apps.form.lib.RegexValidator",
+                        "properties": {
+                          "regex": "^\\+?[0-9]{8,15}$",
+                          "message": "Enter a valid phone number"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "phoneSecondary",
+                "label": "Secondary Phone",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "20",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[+]?[0-9\\s\\-()]+$",
+                    "message": "Please enter a valid phone number"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "email",
+                "label": "Business Email",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                    "message": "Enter a valid email address"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "locationSection",
+                "label": "Location",
+                "value": "<h4>Physical Location</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "districtCode",
+                "label": "District",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "mdDistrict",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "true",
+                    "emptyLabel": "-- Select District --",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "village",
+                "label": "Village / Town",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "physicalAddress",
+                "label": "Physical Address",
+                "required": "true",
+                "readonly": "",
+                "value": "",
+                "rows": "3",
+                "cols": "50",
+                "placeholder": "Street address, landmarks, etc.",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "gpsLatitude",
+                "label": "GPS Latitude",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "-29.31667",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^-?[0-9]{1,3}\\.[0-9]+$",
+                    "message": "Enter valid latitude"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "gpsLongitude",
+                "label": "GPS Longitude",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "27.48333",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^-?[0-9]{1,3}\\.[0-9]+$",
+                    "message": "Enter valid longitude"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "facilitiesSection",
+                "label": "Facilities",
+                "value": "<h4>Storage & Facilities</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "storageCapacitySqm",
+                "label": "Storage Capacity (sq meters)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+(\\.[0-9]{1,2})?$",
+                    "message": "Enter valid area"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "hasColdStorage",
+                "label": "Has Cold Storage?",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "coldStorageCapacity",
+                "label": "Cold Storage Capacity (cubic meters)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.Radio",
+              "properties": {
+                "id": "hasDisplayArea",
+                "label": "Has Display/Shop Area?",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "Y",
+                        "label": "Yes"
+                      },
+                      {
+                        "value": "N",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "bankingSection",
+                "label": "Banking Information",
+                "value": "<h4>Payment Details</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "bankName",
+                "label": "Bank Name",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "bankBranch",
+                "label": "Bank Branch",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "100",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "bankAccountNo",
+                "label": "Bank Account Number",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Please enter numbers only"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "bankAccountName",
+                "label": "Account Holder Name",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "200",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "mobileMoneyNumber",
+                "label": "Mobile Money Number",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "20",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[+]?[0-9\\s\\-()]+$",
+                    "message": "Please enter a valid phone number"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "mobileMoneyProvider",
+                "label": "Mobile Money Provider",
+                "required": "",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "MPESA",
+                        "label": "M-Pesa"
+                      },
+                      {
+                        "value": "ECOCASH",
+                        "label": "EcoCash"
+                      },
+                      {
+                        "value": "OTHER",
+                        "label": "Other"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "licensingSection",
+                "label": "Licensing",
+                "value": "<h4>Licensing & Certification</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "licenseNumber",
+                "label": "Trading License Number",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Please enter numbers only"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "licenseIssueDate",
+                "label": "License Issue Date",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "licenseExpiry",
+                "label": "License Expiry Date",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.FileUpload",
+              "properties": {
+                "id": "licenseDocument",
+                "label": "License Document",
+                "required": "",
+                "readonly": "",
+                "maxSize": "5242880",
+                "fileType": "pdf,jpg,jpeg,png",
+                "removeFile": "true"
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "pesticidesLicense",
+                "label": "Pesticides Dealer License",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "maxlength": "50",
+                "placeholder": "Required for crop protection products",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "pesticidesLicenseExp",
+                "label": "Pesticides License Expiry",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "productsSection",
+                "label": "Allowed Products",
+                "value": "<h4>Authorized Product Categories</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CheckBox",
+              "properties": {
+                "id": "allowedCategories",
+                "label": "Allowed Input Categories",
+                "required": "",
+                "readonly": "",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "md38InputCategory",
+                    "idColumn": "code",
+                    "labelColumn": "name",
+                    "addEmptyOption": "false",
+                    "emptyLabel": "",
+                    "useAjax": "false"
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "termsSection",
+                "label": "Terms",
+                "value": "<h4>Commission & Terms</h4>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "commissionRatePct",
+                "label": "Commission Rate (%)",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "10.0",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]{1,2}(\\.[0-9]{1,2})?$",
+                    "message": "Enter percentage (0-30)"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "paymentTermsDays",
+                "label": "Payment Terms (days)",
+                "required": "",
+                "readonly": "",
+                "value": "30",
+                "size": "medium",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.RegexValidator",
+                  "properties": {
+                    "regex": "^[0-9]+$",
+                    "message": "Enter number of days"
+                  }
+                },
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "creditLimit",
+                "label": "Credit Limit",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "size": "medium",
+                "placeholder": "0.00",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.CustomHTML",
+              "properties": {
+                "id": "metricsSection",
+                "label": "Performance",
+                "value": "<h4>Performance Metrics</h4>\n<p class=\"text-muted\">Auto-calculated from transactions</p>\n",
+                "customParameterName": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "performanceScore",
+                "label": "Performance Score",
+                "required": "",
+                "readonly": "true",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "totalTransactions",
+                "label": "Total Transactions",
+                "required": "",
+                "readonly": "true",
+                "value": "0",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "totalValueDistrib",
+                "label": "Total Value Distributed",
+                "required": "",
+                "readonly": "true",
+                "value": "0.00",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "lastTransactionDate",
+                "label": "Last Transaction Date",
+                "required": "",
+                "readonly": "true",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "farmerSatisfaction",
+                "label": "Farmer Satisfaction Score",
+                "required": "",
+                "readonly": "true",
+                "value": "",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.SelectBox",
+              "properties": {
+                "id": "status",
+                "label": "Status",
+                "required": "true",
+                "readonly": "",
+                "multiple": "",
+                "size": "medium",
+                "optionsBinder": {
+                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
+                  "properties": {
+                    "formDefId": "",
+                    "options": [
+                      {
+                        "value": "PENDING",
+                        "label": "Pending Approval"
+                      },
+                      {
+                        "value": "ACTIVE",
+                        "label": "Active"
+                      },
+                      {
+                        "value": "SUSPENDED",
+                        "label": "Suspended"
+                      },
+                      {
+                        "value": "INACTIVE",
+                        "label": "Inactive"
+                      },
+                      {
+                        "value": "BLACKLISTED",
+                        "label": "Blacklisted"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextArea",
+              "properties": {
+                "id": "statusReason",
+                "label": "Status Reason",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "rows": "2",
+                "cols": "50",
+                "placeholder": "Reason for status change",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "enrollmentDate",
+                "label": "Enrollment Date",
+                "required": "",
+                "readonly": "",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "approvedBy",
+                "label": "Approved By",
+                "required": "",
+                "readonly": "true",
+                "value": "",
+                "size": "medium",
+                "encryption": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.DatePicker",
+              "properties": {
+                "id": "approvedDate",
+                "label": "Approved Date",
+                "required": "",
+                "readonly": "true",
+                "value": "",
+                "format": "yyyy-MM-dd",
+                "yearRange": "c-100:c+10",
+                "currentDateAs": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "generator": "joget-form-generator",
+    "version": "0.1.0",
+    "field_count": 1
+  }
+}

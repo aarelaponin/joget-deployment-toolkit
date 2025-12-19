@@ -1,0 +1,6 @@
+code,name,description,minStorageSqm,minCapital,requiresLicense,allowedCategories,commissionRatePct,sortOrder,isActive
+TIER1,Tier 1 - Major Dealer,Large agro-dealers with full product range,500,500000.00,Y,SEED;FERT;PEST;HERB;TOOL,8.0,1,Y
+TIER2,Tier 2 - Regional Dealer,Medium-sized regional distributors,200,200000.00,Y,SEED;FERT;PEST;HERB,10.0,2,Y
+TIER3,Tier 3 - Local Dealer,Small local agro-input shops,50,50000.00,Y,SEED;FERT,12.0,3,Y
+COOP,Cooperative Outlet,Farmer cooperative input outlets,100,100000.00,N,SEED;FERT;TOOL,6.0,4,Y
+MOBILE,Mobile Dealer,Mobile input distribution units,20,30000.00,Y,SEED;FERT,15.0,5,Y

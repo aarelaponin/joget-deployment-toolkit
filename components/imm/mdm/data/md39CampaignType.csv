@@ -1,0 +1,7 @@
+code,name,description,typicalDuration,requiresBudgetApproval,allowCarryover,sortOrder,isActive
+SEASONAL,Seasonal Distribution,Regular seasonal input distribution,6,Y,N,1,Y
+EMERGENCY,Emergency Response,Emergency input support after disasters,3,Y,N,2,Y
+SUBSIDY,Subsidy Program,Government subsidy-linked distribution,12,Y,Y,3,Y
+VOUCHER,E-Voucher Program,Electronic voucher-based distribution,6,Y,N,4,Y
+TARGETED,Targeted Support,Support for specific farmer categories,4,Y,N,5,Y
+RECOVERY,Recovery Program,Post-crisis recovery support,9,Y,Y,6,Y

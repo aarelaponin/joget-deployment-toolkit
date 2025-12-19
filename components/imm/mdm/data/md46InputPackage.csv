@@ -1,0 +1,7 @@
+code,name,description,targetCategory,packageValue,applicableZones,minLandHectares,maxLandHectares,isActive
+PKG_MAIZE_SMALL,Smallholder Maize Package,Basic maize production package for small farmers,SMALL,2500.00,lowlands;foothills,0.5,2,Y
+PKG_MAIZE_STD,Standard Maize Package,Standard maize package for emerging farmers,EMERGING,5000.00,lowlands;foothills;mountains,2,5,Y
+PKG_BEAN_SMALL,Smallholder Bean Package,Bean production starter package,SMALL,1800.00,lowlands;foothills,0.25,1,Y
+PKG_MIXED_SMALL,Mixed Crop Package,Combined maize and bean package,SMALL,3500.00,lowlands,0.5,2,Y
+PKG_EMERGENCY,Emergency Relief Package,Basic seed package for disaster recovery,VULNERABLE,1500.00,all,0,5,Y
+PKG_YOUTH,Youth Farmer Starter,Comprehensive starter kit for young farmers,YOUTH,4000.00,all,0.5,3,Y

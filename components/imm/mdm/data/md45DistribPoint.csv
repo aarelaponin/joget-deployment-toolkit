@@ -1,0 +1,9 @@
+code,name,pointType,districtCode,village,physicalAddress,gpsLatitude,gpsLongitude,capacityFarmersDay,storageTonnes,hasColdStorage,contactPerson,contactPhone,contactEmail,operatingHours,isActive
+DP_MASERU_01,Maseru Main Depot,DEPOT,MAS,Maseru,Ministry of Agriculture Compound,-29.3167,27.4833,500,200,N,John Mokhele,+26622312345,maseru.depot@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_LERIBE_01,Leribe District Office,EXTENSION,LER,Hlotse,Agricultural Resource Center,-28.8833,28.0500,200,50,N,Maria Letsie,+26622451234,leribe.agri@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_BEREA_01,Berea Agri Hub,SUB_DEPOT,BER,Teyateyaneng,Berea Agricultural Office,-29.1500,27.7333,150,30,N,Peter Mohapi,+26622500123,berea.agri@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_MAFETENG_01,Mafeteng Distribution Point,EXTENSION,MAF,Mafeteng,District Agricultural Office,-29.8167,27.2333,180,40,N,Grace Ntho,+26622701234,mafeteng.agri@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_MOHALES_01,Mohale's Hoek Center,EXTENSION,MOH,Mohale's Hoek,Mohale's Hoek Agri Center,-30.1500,27.4667,120,25,N,David Mokoena,+26622781234,mohales.agri@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_QUTHING_01,Quthing Resource Point,EXTENSION,QUT,Moyeni,Quthing Agricultural Office,-30.4000,27.7000,100,20,N,Sarah Tsolo,+26622751234,quthing.agri@moa.gov.ls,Mon-Fri 08:00-16:00,Y
+DP_MOBILE_01,Mobile Unit Alpha,MOBILE,MAS,Various,Mobile distribution vehicle,-29.3167,27.4833,80,5,N,Team Alpha,+26622312500,mobile.alpha@moa.gov.ls,As scheduled,Y
+DP_COOP_01,Maseru Farmers Coop,COOPERATIVE,MAS,Ha Thetsane,Maseru Coop Warehouse,-29.3500,27.5000,100,15,N,Coop Manager,+26622315678,maseru.coop@farmers.org.ls,Mon-Sat 07:00-17:00,Y

@@ -1,0 +1,8 @@
+code,name,description,requiresBatchTrack,hasExpiryDate,requiresLicense,coldChainRequired,sortOrder,isActive
+SEED,Seeds,Agricultural seeds for planting,Y,Y,N,N,1,Y
+FERT,Fertilizers,Soil nutrients and fertilizers,Y,Y,N,N,2,Y
+PEST,Pesticides,Crop protection chemicals,Y,Y,Y,N,3,Y
+HERB,Herbicides,Weed control chemicals,Y,Y,Y,N,4,Y
+TOOL,Tools & Equipment,Farm tools and small equipment,N,N,N,N,5,Y
+VACCINE,Livestock Vaccines,Animal vaccines and treatments,Y,Y,Y,Y,6,Y
+FEED,Animal Feed,Livestock feed and supplements,Y,Y,N,N,7,Y

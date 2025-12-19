@@ -3,18 +3,42 @@
 **Focused Python toolkit for Joget DX form and application deployment automation**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/your-org/joget-deployment-toolkit)
+[![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/aarelaponin/joget-deployment-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
 
-`joget-deployment-toolkit` is a production-ready Python toolkit for automating Joget DX deployments. It provides a type-safe REST API client, MDM data deployment orchestration, and seamless integration with instance configuration managed by [sysadmin-scripts](https://github.com/your-org/sysadmin-scripts).
+`joget-deployment-toolkit` is a production-ready Python toolkit for automating Joget DX deployments. It provides a type-safe REST API client, MDM data deployment orchestration, and seamless integration with instance configuration managed by [joget-instance-manager](https://github.com/aarelaponin/joget-instance-manager).
 
 **Core Mission:** Simplify and automate deployment of forms, applications, and Master Data Management (MDM) to Joget DX instances.
 
+### Tool Ecosystem
+
+```
+┌─────────────────────────────────────┐
+│  joget-instance-manager             │  ← Instance Configuration Layer
+│  (setup, reset, configure)          │
+│                                     │
+│  Creates: Database, Tomcat config,  │
+│           Datasource, Schema        │
+└──────────────┬──────────────────────┘
+               │ writes/reads
+               ▼
+┌─────────────────────────────────────┐
+│  ~/.joget/instances.yaml            │  ← Single Source of Truth
+│  (shared configuration)             │
+└──────────────┬──────────────────────┘
+               │ reads
+               ▼
+┌─────────────────────────────────────┐
+│  joget-deployment-toolkit           │  ← Content Deployment Layer
+│  (deploy forms, MDM, apps)          │
+└─────────────────────────────────────┘
+```
+
 ## Features
 
-### 🚀 Deployment Operations
+### Deployment Operations
 
 - **Form Deployment**: Create, update, and manage Joget forms via REST API
 - **Application Management**: List, export, import applications
@@ -24,7 +48,7 @@
 - **Form Discovery**: Extract form definitions from Joget database
 - **Instance Inventory**: Check instance status and compare apps across environments
 
-### 🔧 Developer Experience
+### Developer Experience
 
 - **Shared Configuration**: Zero-config client creation via `from_instance('jdx4')`
 - **Multiple Auth Methods**: API Key, Session (username/password), Basic Auth
@@ -32,12 +56,13 @@
 - **Error Handling**: Specific exceptions for HTTP status codes
 - **Smart Retries**: Exponential backoff for transient failures
 
-### 🎯 What Makes This Focused
+### What This Toolkit Does NOT Do
 
-This toolkit is **specifically designed for deployment workflows**. It does NOT include:
-- ❌ Health checks (use sysadmin-scripts)
-- ❌ Plugin discovery (not deployment-related)
-- ❌ Framework-specific abstractions
+This toolkit is **specifically designed for deployment workflows**. For instance management, use [joget-instance-manager](https://github.com/aarelaponin/joget-instance-manager):
+- Instance setup/reset/configuration
+- Health checks
+- Database schema management
+- Tomcat/Glowroot configuration
 
 ## Installation
 
@@ -53,7 +78,7 @@ pip install -e ".[dev]"
 
 ### Using Shared Config (Recommended)
 
-The toolkit integrates with instance configuration from `~/.joget/instances.yaml` (managed by sysadmin-scripts):
+The toolkit integrates with instance configuration from `~/.joget/instances.yaml` (managed by joget-instance-manager):
 
 ```python
 from joget_deployment_toolkit import JogetClient
@@ -69,11 +94,23 @@ print(f"Found {len(apps)} applications")
 client.export_application('farmersPortal', 'backup.zip')
 ```
 
-**Password handling:** The toolkit reads passwords from environment variables:
+### Password Handling
+
+The toolkit reads the **web admin password** from environment variables. This is one of three password types in the ecosystem:
+
 ```bash
+# MySQL root passwords - used by joget-instance-manager for database creation
+MYSQL4_ROOT_PASSWORD=root_password
+
+# Database user passwords - used by Joget app to connect to database
+JOGET_CLIENT_ALPHA_PASSWORD=db_user_password
+
+# Web admin passwords - used by THIS TOOLKIT for REST API access
 export JDX4_PASSWORD=admin
 export JDX5_PASSWORD=admin
 ```
+
+**This toolkit only needs the web admin password (JDX{N}_PASSWORD).** The other passwords are managed by joget-instance-manager.
 
 ### Alternative: Direct Configuration
 
@@ -99,40 +136,40 @@ client = JogetClient(config)
 
 ## Configuration Setup
 
-### 1. Configure Instances (One-Time Setup)
+### 1. Set Up Instance (joget-instance-manager)
 
-If using the recommended shared config approach, first export your instance configuration:
+First, ensure the instance is configured using joget-instance-manager:
 
 ```bash
-# In sysadmin-scripts directory
-python scripts/joget_instance_manager.py --sync-all-to-joget
+# In joget-instance-manager directory
+python scripts/joget_instance_manager.py --setup jdx4
 ```
 
-This creates `~/.joget/instances.yaml`:
+This creates `~/.joget/instances.yaml` with instance configuration:
 
 ```yaml
 instances:
   jdx4:
-    url: http://localhost:8084/jw
-    web_port: 8084
-    db_host: localhost
-    db_port: 3309
-    db_name: jwdb
-    username: admin
-    password_env: JDX4_PASSWORD
-    version: "9.0.0"
+    name: jdx4
+    installation_path: /path/to/joget
+    tomcat:
+      http_port: 8084
+    database:
+      name: jwdb
+      mysql_instance: mysql4
+    credentials:
+      username: admin
+      password_env: JDX4_PASSWORD
 ```
 
-### 2. Set Environment Variables
+### 2. Set Web Admin Password
 
 ```bash
-# Set passwords for instances
+# Set password for REST API access
 export JDX4_PASSWORD=admin
-export JDX5_PASSWORD=admin
-export JDX6_PASSWORD=admin
 ```
 
-**Best practice:** Add these to your `.bashrc` or `.zshrc`, or use a password manager integration.
+**Best practice:** Add to your `.bashrc` or `.zshrc`, or use a password manager integration.
 
 ## Usage Examples
 
@@ -338,19 +375,6 @@ config = ClientConfig(
 client = JogetClient(config, auth_strategy=auth)
 ```
 
-### 4. Custom Authentication
-
-```python
-from joget_deployment_toolkit.auth import AuthStrategy
-
-class CustomAuth(AuthStrategy):
-    def apply(self, request_kwargs):
-        request_kwargs['headers']['X-Custom-Token'] = 'my-token'
-        return request_kwargs
-
-client = JogetClient(config, auth_strategy=CustomAuth())
-```
-
 ## Error Handling
 
 The toolkit provides specific exceptions for different error conditions:
@@ -395,54 +419,6 @@ config = ClientConfig(
 )
 ```
 
-### DatabaseConfig
-
-```python
-from joget_deployment_toolkit.config import DatabaseConfig
-
-db_config = DatabaseConfig(
-    host='localhost',
-    port=3309,
-    database='jwdb',
-    user='root',
-    password='password',
-    pool_size=5,            # Connection pool size
-    pool_name='joget_pool'
-)
-```
-
-## Integration with sysadmin-scripts
-
-This toolkit is designed to work seamlessly with [sysadmin-scripts](https://github.com/your-org/sysadmin-scripts) for instance management:
-
-**Workflow:**
-1. **sysadmin-scripts**: Manages MySQL + Joget instances, exports config
-2. **joget-deployment-toolkit**: Reads config, deploys forms/apps/data
-
-**Config flow:**
-```
-sysadmin-scripts (WRITES)
-    ↓
-~/.joget/instances.yaml (SINGLE SOURCE OF TRUTH)
-    ↓
-joget-deployment-toolkit (READS)
-```
-
-**Example integration:**
-
-```bash
-# 1. Set up instance (sysadmin-scripts)
-cd sysadmin-scripts
-python scripts/joget_instance_manager.py --setup joget_instance_4
-
-# 2. Export config to shared location
-python scripts/joget_instance_manager.py --sync-all-to-joget
-
-# 3. Deploy forms (joget-deployment-toolkit)
-cd ../deployment-scripts
-python deploy_mdm.py --instance jdx4  # Uses shared config automatically
-```
-
 ## Development
 
 ### Running Tests
@@ -456,9 +432,6 @@ pytest
 
 # Run with coverage
 pytest --cov=joget_deployment_toolkit --cov-report=html
-
-# Run specific tests
-pytest tests/test_client.py -v
 ```
 
 ### Code Quality
@@ -475,8 +448,6 @@ mypy src/
 ```
 
 ## Architecture
-
-The toolkit uses a modular architecture with clear separation of concerns:
 
 ```
 joget_deployment_toolkit/
@@ -501,50 +472,6 @@ joget_deployment_toolkit/
 └── exceptions.py           # Error handling
 ```
 
-## Migration from v3.x (joget-toolkit)
-
-If you're upgrading from the previous `joget-toolkit` v3.x:
-
-### Package Rename
-
-```python
-# OLD (v3.x)
-from joget_deployment_toolkit import JogetClient
-from joget_deployment_toolkit.integrations import from_frs
-
-# NEW (v1.0.0)
-from joget_deployment_toolkit import JogetClient
-```
-
-### Configuration Changes
-
-```python
-# OLD (v3.x) - FRS integration
-from joget_deployment_toolkit.integrations import from_frs
-client = from_frs('jdx4')  # Read from ~/.frs-dev/config.yaml
-
-# NEW (v1.0.0) - Shared config
-from joget_deployment_toolkit import JogetClient
-client = JogetClient.from_instance('jdx4')  # Read from ~/.joget/instances.yaml
-```
-
-### Config File Migration
-
-```bash
-# If you have ~/.frs-dev/config.yaml, re-export from sysadmin-scripts:
-cd sysadmin-scripts
-python scripts/joget_instance_manager.py --sync-all-to-joget
-
-# This creates ~/.joget/instances.yaml with the same instance data
-```
-
-### Removed Features
-
-The following features were removed in v1.0.0 (use sysadmin-scripts instead):
-- ❌ `client.test_connection()` → Use `sysadmin-scripts/scripts/health_check.py`
-- ❌ `client.get_health_status()` → Use health_check.py
-- ❌ `client.list_plugins()` → Not needed for deployment workflows
-
 ## Changelog
 
 ### v1.1.0 (2025-12-16)
@@ -563,41 +490,19 @@ The following features were removed in v1.0.0 (use sysadmin-scripts instead):
 **Breaking Changes:**
 - Renamed package from `joget-toolkit` to `joget-deployment-toolkit`
 - Removed FRS Platform integration (replaced with shared config)
-- Removed health check operations (use sysadmin-scripts instead)
+- Removed health check operations (use joget-instance-manager instead)
 - Removed plugin discovery (not deployment-related)
 - Changed config location: `~/.frs-dev/config.yaml` → `~/.joget/instances.yaml`
 
 **New Features:**
 - Added `JogetClient.from_instance()` for zero-config setup
 - Added shared config loader (`config/shared_loader.py`)
-- PyYAML now a core dependency (not optional)
 
-**Improvements:**
-- Simplified focus on deployment operations
-- Clearer integration with sysadmin-scripts
-- Better documentation and examples
+## Related Projects
 
-## Contributing
-
-Contributions are welcome! This is a focused tool for deployment automation.
-
-**Before contributing:**
-1. Check existing issues and PRs
-2. Ensure changes align with deployment focus
-3. Add tests for new features
-4. Update documentation
+- **[joget-instance-manager](https://github.com/aarelaponin/joget-instance-manager)** - Instance configuration layer: setup, reset, configure Joget instances (writes `~/.joget/instances.yaml`)
+- **[joget-form-generator](https://github.com/aarelaponin/joget-form-generator)** - Generate Joget forms from YAML/Excel/DB schemas
 
 ## License
 
 MIT License - see [LICENSE](LICENSE) file
-
-## Related Projects
-
-- **[sysadmin-scripts](https://github.com/your-org/sysadmin-scripts)** - Infrastructure layer for MySQL + Joget instance management
-- **[joget-form-generator](https://github.com/your-org/joget-form-generator)** - Generate Joget forms from YAML/Excel/DB schemas
-- **[req-to-form-spec](https://github.com/your-org/req-to-form-spec)** - Convert business requirements to form specifications with AI
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/your-org/joget-deployment-toolkit/issues)
-- **Documentation**: [Full Documentation](https://joget-deployment-toolkit.readthedocs.io)
