@@ -13,7 +13,7 @@ import logging
 import requests
 from requests.adapters import HTTPAdapter
 
-from ..auth import APIKeyAuth, AuthStrategy, select_auth_strategy
+from ..auth import APIKeyAuth, AuthStrategy, SessionAuth, select_auth_strategy
 from ..config import ClientConfig
 from ..exceptions import AuthenticationError
 from .http_client import HTTPClient
@@ -187,7 +187,8 @@ class BaseClient:
         # Add cookies from session if using session auth
         # BUT skip session cookies when calling plugin API endpoints (indicated by api_id)
         # because plugin APIs use their own authentication (api_id/api_key headers)
-        if hasattr(self.auth_strategy, "session") and not api_id:
+        if isinstance(self.auth_strategy, SessionAuth) and not api_id:
+            # SessionAuth stores authenticated cookies in self.session (the client's session)
             kwargs["cookies"] = self.session.cookies
 
         # Execute request via HTTP client

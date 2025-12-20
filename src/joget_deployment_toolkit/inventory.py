@@ -63,7 +63,7 @@ def _check_instance_http(url: str, timeout: int = DEFAULT_CHECK_TIMEOUT) -> dict
     # Use the published apps endpoint as a simple health check
     # Note: This endpoint may return 302 (redirect to login) or 400 (bad request)
     # but any HTTP response means the server is running
-    check_url = f"{base_url}/web/json/apps/published/list"
+    check_url = f"{base_url}/web/json/console/app/list"
 
     start_time = datetime.now()
     try:

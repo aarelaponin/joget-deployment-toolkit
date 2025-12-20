@@ -161,11 +161,16 @@ class SessionAuth(AuthStrategy):
     Session-based authentication (username/password with cookies).
 
     This authentication method:
-    1. Performs a login request to establish a session
-    2. Stores session cookies
-    3. Uses cookies for subsequent requests
+    1. Fetches the login page to establish a session
+    2. Retrieves CSRF token from OWASP CSRFGuard JavaScript servlet
+    3. Performs login with CSRF token
+    4. Stores session cookies for subsequent requests
 
     Required for Joget Console API endpoints that don't support API keys.
+
+    Note: Joget 9.x uses OWASP CSRFGuard which requires a CSRF token for
+    all POST requests including login. This class handles the token
+    retrieval automatically.
 
     Usage:
         auth = SessionAuth(
@@ -198,14 +203,66 @@ class SessionAuth(AuthStrategy):
         self.username = username
         self.password = password
         self._authenticated = False
+        self._csrf_token: str | None = None
         logger.debug(f"Initialized session authentication for user: {username}")
+
+    def _get_csrf_token(self, session: requests.Session) -> str | None:
+        """
+        Retrieve CSRF token from OWASP CSRFGuard JavaScript servlet.
+
+        Joget 9.x uses OWASP CSRFGuard which serves a JavaScript file
+        containing the CSRF token. This method fetches and parses it.
+
+        Args:
+            session: requests.Session with established cookies
+
+        Returns:
+            CSRF token string, or None if not found
+        """
+        import re
+
+        csrf_url = f"{self.base_url}/csrf"
+        login_url = f"{self.base_url}/web/login"
+
+        try:
+            # First get the login page to establish session
+            session.get(login_url)
+
+            # Then get the CSRF JavaScript with proper Referer
+            response = session.get(
+                csrf_url,
+                headers={"Referer": login_url}
+            )
+
+            if response.status_code != 200:
+                logger.warning(f"Failed to fetch CSRF JavaScript: {response.status_code}")
+                return None
+
+            # Extract token from JavaScript
+            # Format: masterTokenValue = "TOKEN-VALUE"
+            match = re.search(
+                r'masterTokenValue\s*[=:]\s*["\']([^"\']+)["\']',
+                response.text
+            )
+
+            if match:
+                token = match.group(1)
+                logger.debug(f"Retrieved CSRF token: {token[:8]}...")
+                return token
+
+            logger.warning("CSRF token not found in JavaScript response")
+            return None
+
+        except requests.RequestException as e:
+            logger.warning(f"Failed to retrieve CSRF token: {e}")
+            return None
 
     def authenticate(self, session: requests.Session) -> bool:
         """
         Authenticate and establish session.
 
-        Performs login via Joget's Spring Security endpoint and stores
-        session cookies for subsequent requests.
+        Performs login via Joget's Spring Security endpoint with OWASP
+        CSRFGuard token handling. Stores session cookies for subsequent requests.
 
         Args:
             session: requests.Session to authenticate
@@ -217,26 +274,54 @@ class SessionAuth(AuthStrategy):
             requests.RequestException: If login request fails
         """
         login_url = f"{self.base_url}/j_spring_security_check"
+        referer_url = f"{self.base_url}/web/login"
 
         logger.debug(f"Authenticating user {self.username} at {login_url}")
 
         try:
+            # Get CSRF token first (required for Joget 9.x with OWASP CSRFGuard)
+            self._csrf_token = self._get_csrf_token(session)
+
+            # Prepare login data
+            login_data = {
+                "j_username": self.username,
+                "j_password": self.password,
+                "submit": "Login"
+            }
+
+            # Prepare headers
+            headers = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Referer": referer_url,
+                "Origin": self.base_url
+            }
+
+            # Add CSRF token if available (required for Joget 9.x)
+            if self._csrf_token:
+                login_data["OWASP-CSRFTOKEN"] = self._csrf_token
+                headers["OWASP-CSRFTOKEN"] = self._csrf_token
+                headers["X-Requested-With"] = "XMLHttpRequest"
+
             response = session.post(
                 login_url,
-                data={"j_username": self.username, "j_password": self.password},
+                data=login_data,
+                headers=headers,
                 allow_redirects=True,
             )
 
             # Check if login was successful
             # Joget redirects to error page on failed login
-            if response.status_code == 200 and "login" not in response.url.lower():
-                self._authenticated = True
-                logger.info(f"Successfully authenticated user: {self.username}")
-                return True
-            else:
-                self._authenticated = False
-                logger.warning(f"Authentication failed for user: {self.username}")
-                return False
+            # Successful login redirects to index.jsp or similar
+            if response.status_code == 200:
+                # Check URL doesn't contain login error indicators
+                if "login" not in response.url.lower() or "error" not in response.url.lower():
+                    self._authenticated = True
+                    logger.info(f"Successfully authenticated user: {self.username}")
+                    return True
+
+            self._authenticated = False
+            logger.warning(f"Authentication failed for user: {self.username}")
+            return False
 
         except requests.RequestException as e:
             logger.error(f"Authentication request failed: {e}")
@@ -247,13 +332,19 @@ class SessionAuth(AuthStrategy):
         """
         Get headers for session-based auth.
 
-        Session authentication relies on cookies, so no special headers
-        are needed beyond standard content type.
+        Session authentication relies on cookies. For Joget 9.x, a Referer
+        header is also required for JSON API calls to pass the CSRF check.
 
         Returns:
-            Standard headers dictionary
+            Headers dictionary with Content-Type and Referer
         """
-        return {"Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json"}
+
+        # Add Referer header for Joget 9.x JSON API CSRF protection
+        if self.base_url:
+            headers["Referer"] = f"{self.base_url}/web/console/home"
+
+        return headers
 
     def is_authenticated(self) -> bool:
         """

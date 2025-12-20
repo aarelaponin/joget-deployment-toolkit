@@ -58,7 +58,9 @@ class JogetAPIError(Exception):
 
     def __str__(self):
         """String representation with status code and endpoint if available."""
-        parts = [self.message]
+        # Ensure message is a string (could be dict from JSON response)
+        msg = str(self.message) if not isinstance(self.message, str) else self.message
+        parts = [msg]
         if self.status_code:
             parts.append(f"(status {self.status_code})")
         if self.endpoint:

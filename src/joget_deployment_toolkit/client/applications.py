@@ -46,7 +46,7 @@ class ApplicationOperations:
         """
         List all published applications.
 
-        Endpoint: /web/json/apps/published/list
+        Endpoint: /web/json/console/app/list
 
         Returns:
             List of ApplicationInfo objects containing basic metadata
@@ -62,7 +62,7 @@ class ApplicationOperations:
             >>> for app in apps:
             ...     print(f"{app.id} v{app.version}: {app.name}")
         """
-        endpoint = "/web/json/apps/published/list"
+        endpoint = "/web/json/console/app/list"
         data = self.get(endpoint)
 
         apps = []
