@@ -3,7 +3,7 @@
 **Focused Python toolkit for Joget DX form and application deployment automation**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/aarelaponin/joget-deployment-toolkit)
+[![Version 1.1.0](https://img.shields.io/badge/version-1.1.0-green.svg)](https://github.com/aarelaponin/joget-deployment-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
@@ -195,6 +195,34 @@ with open('new_form.json') as f:
     client.create_form('farmersPortal', form_json)
 ```
 
+### Form Deployment with FormCreator Plugin
+
+For production deployments, use `deploy_form()` which leverages the [FormCreator API plugin](https://github.com/aarelaponin/joget-form-creator-api) for reliable form deployment with automatic table creation:
+
+```python
+import json
+from joget_deployment_toolkit import JogetClient
+
+client = JogetClient.from_instance('jdx4')
+
+# Load form definition
+form_def = json.load(open("farmer_registration.json"))
+
+# Deploy using FormCreator plugin (creates table, invalidates cache)
+result = client.deploy_form(
+    app_id="farmersPortal",
+    form_definition=form_def,
+    api_id="API-4e39106c-...",      # From Joget API Key Manager
+    api_key="b2cc0157ab464ff5...",   # From Joget API Key Manager
+    create_crud=True,                # Optional: create datalist + menu
+    create_api=False                 # Optional: create REST API endpoint
+)
+
+print(f"Deployed: {result.form_id}, Success: {result.success}")
+```
+
+**Prerequisites:** Install the FormCreator API plugin and create API credentials in Joget's Settings → API Key Manager.
+
 ### Application Management
 
 ```python
@@ -284,6 +312,55 @@ results = deployer.deploy_all_mdm_from_directory(
 
 for r in results:
     print(r)  # ✓ md01maritalStatus: 15 records
+```
+
+### Instance Migration
+
+Migrate forms, datalists, data, and userview menus between Joget instances:
+
+```python
+from joget_deployment_toolkit import JogetClient, InstanceMigrator
+
+source = JogetClient.from_instance('jdx3')
+target = JogetClient.from_instance('jdx4')
+
+migrator = InstanceMigrator(source, target)
+
+# Analyze first (dry-run)
+analysis = migrator.analyze(
+    source_app_id='subsidyApplication',
+    target_app_id='farmersPortal',
+    pattern='md%',
+    userview_id='v',
+    category_label='Master Data'
+)
+print(analysis)
+
+# Execute migration
+result = migrator.migrate_app_component(
+    source_app_id='subsidyApplication',
+    target_app_id='farmersPortal',
+    pattern='md%',
+    with_data=True,
+    userview_id='v',
+    category_label='Master Data'
+)
+print(f"Migrated {result.forms_migrated} forms, {result.datalists_migrated} datalists")
+```
+
+**CLI Usage:**
+
+```bash
+# Dry-run to preview migration
+joget-deploy migrate --source jdx3 --source-app subsidyApplication \
+                     --target jdx4 --target-app farmersPortal \
+                     --pattern "md%" --dry-run
+
+# Full migration with data and menu items
+joget-deploy migrate --source jdx3 --source-app subsidyApplication \
+                     --target jdx4 --target-app farmersPortal \
+                     --pattern "md%" --with-data \
+                     --userview v --category "Master Data"
 ```
 
 ### Instance Inventory
@@ -474,29 +551,29 @@ joget_deployment_toolkit/
 
 ## Changelog
 
-### v1.1.0 (2025-12-16)
+### v1.1.0 (2025-12-22)
 
 **New Features:**
-- Added `ComponentDeployer` for deploying complete components (MDM + forms) in correct order
-- Added Inventory API for pre-deployment checks:
-  - `list_instances()` - List all configured instances with running status
-  - `get_instance_status()` - Check single instance health
-  - `get_apps_overview()` - Get apps across multiple instances
-  - `compare_apps()` - Compare applications between environments
-- Added `JogetClient.check_instance()` class method for quick connectivity checks
+- **`deploy_form()`**: Deploy forms via FormCreator API plugin with automatic table creation
+- **`InstanceMigrator`**: Migrate forms, datalists, data, and menus between instances
+- **`ComponentDeployer`**: Deploy complete components (MDM + forms) in correct order
+- **Inventory API**: `list_instances()`, `get_instance_status()`, `compare_apps()`
+- **Datalist operations**: `list_datalists()`, `create_datalist()`, `update_datalist()`
+- **Userview operations**: `list_userviews()`, `create_crud_menu()`, `add_menu_to_category()`
+- **CLI migrate command**: `joget-deploy migrate --source jdx3 --target jdx4`
 
-### v1.0.0 (2025-01-19)
+**Improvements:**
+- SessionAuth updated for Joget 9.x OWASP CSRFGuard compatibility
+- Better response parsing for nested JSON from FormCreator plugin
 
-**Breaking Changes:**
-- Renamed package from `joget-toolkit` to `joget-deployment-toolkit`
-- Removed FRS Platform integration (replaced with shared config)
-- Removed health check operations (use joget-instance-manager instead)
-- Removed plugin discovery (not deployment-related)
-- Changed config location: `~/.frs-dev/config.yaml` → `~/.joget/instances.yaml`
+### v1.0.0 (2025-12-16)
 
-**New Features:**
-- Added `JogetClient.from_instance()` for zero-config setup
-- Added shared config loader (`config/shared_loader.py`)
+**Initial Release** - Focused deployment toolkit refactored from joget-toolkit.
+
+- `JogetClient.from_instance()` for zero-config setup
+- Form, Application, and Data operations
+- Multiple auth strategies (Session, API Key, Basic)
+- Shared config from `~/.joget/instances.yaml`
 
 ## Related Projects
 

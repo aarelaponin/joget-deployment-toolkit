@@ -37,9 +37,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What This Toolkit IS
 
 - **Deployment automation** - Forms, applications, data submission, MDM orchestration
+- **Cross-instance migration** - Migrate forms, datalists, data, and menus between instances
 - **REST API client** - Type-safe Joget DX API client with multiple auth strategies
 - **Form discovery** - Extract form definitions from Joget MySQL database
 - **Shared config integration** - Zero-config client creation via `from_instance('jdx4')`
+- **CLI tool** - `joget-deploy` command with status, forms, check, and migrate commands
 
 ## What This Toolkit IS NOT
 
@@ -64,6 +66,84 @@ JDX4_PASSWORD=admin
 
 **This toolkit only needs type 3 (web admin password).** Types 1 and 2 are managed by joget-instance-manager.
 
+### Shared .env File
+
+All passwords are centralized in the joget-instance-manager project's `.env` file:
+
+**Location:** `/Users/aarelaponin/PycharmProjects/dev/joget-instance-manager/.env`
+
+```bash
+# MySQL Root Passwords (all instances)
+MYSQL1_ROOT_PASSWORD=at456vkm
+MYSQL2_ROOT_PASSWORD=at456vkm
+MYSQL3_ROOT_PASSWORD=at456vkm
+MYSQL4_ROOT_PASSWORD=at456vkm
+MYSQL5_ROOT_PASSWORD=at456vkm
+MYSQL6_ROOT_PASSWORD=at456vkm
+
+# Joget Web Admin Passwords (for REST API access)
+JDX1_PASSWORD=admin
+JDX2_PASSWORD=admin
+JDX3_PASSWORD=admin
+JDX4_PASSWORD=admin
+JDX5_PASSWORD=admin
+JDX6_PASSWORD=admin
+```
+
+**To use:** Source the .env file before running toolkit commands:
+```bash
+source /Users/aarelaponin/PycharmProjects/dev/joget-instance-manager/.env
+```
+
+Or for direct database access (forms/data deployment without REST API):
+```bash
+# MySQL instance ports:
+# mysql1: 3306, mysql2: 3307, mysql3: 3308, mysql4: 3309, mysql5: 3310, mysql6: 3311
+mysql -h localhost -P 3309 -u root -p$MYSQL4_ROOT_PASSWORD jwdb
+```
+
+## Menu Types (Important!)
+
+When creating userview menus, always use **CrudMenu** (not FormMenu):
+
+| Menu Type | Class | Use Case |
+|-----------|-------|----------|
+| **CrudMenu** | `org.joget.plugin.enterprise.CrudMenu` | Standard CRUD operations with datalist + forms |
+| FormMenu | `org.joget.apps.userview.lib.FormMenu` | Standalone form only (no list view) |
+
+### CrudMenu Requirements
+
+A CrudMenu requires THREE components to work:
+1. **Form** - for add/edit operations
+2. **Datalist** - for listing records (naming convention: `list_{formId}`)
+3. **Menu config** - linking datalist + form
+
+```python
+# CORRECT - Use create_crud_menu() which generates proper CrudMenu
+menu = client.create_crud_menu(
+    form_id="farmerRegistrationForm",
+    form_name="01 - Farmer Registration Form",
+    datalist_id="list_farmerRegistrationForm"  # Must exist!
+)
+
+# WRONG - Don't create FormMenu for CRUD operations
+# FormMenu only shows a form, no list/delete capabilities
+```
+
+### Migration Checklist
+
+When migrating forms between instances:
+- [ ] Migrate the form definition
+- [ ] Migrate the corresponding datalist (`list_{formId}`)
+- [ ] Create CrudMenu (not FormMenu) in userview
+- [ ] Restart Tomcat to clear cache
+
+### Datalist Naming Convention
+
+The toolkit expects datalists to follow the pattern `list_{formId}`:
+- Form: `farmerRegistrationForm` → Datalist: `list_farmerRegistrationForm`
+- Form: `md01` → Datalist: `list_md01`
+
 ## Architecture
 
 ```
@@ -73,7 +153,9 @@ joget_deployment_toolkit/
 │   ├── base.py               # HTTP client foundation
 │   ├── forms.py              # FormOperations mixin
 │   ├── applications.py       # ApplicationOperations mixin
-│   └── data.py               # DataOperations mixin
+│   ├── data.py               # DataOperations mixin
+│   ├── datalists.py          # DatalistOperations mixin
+│   └── userviews.py          # UserviewOperations mixin
 ├── auth.py                   # Authentication strategies
 ├── config/                   # Configuration management
 │   ├── models.py             # Pydantic config models
@@ -81,13 +163,23 @@ joget_deployment_toolkit/
 │   └── shared_loader.py      # Shared config integration
 ├── operations/               # High-level orchestration
 │   ├── mdm_deployer.py       # MDM deployment workflow
-│   └── component_deployer.py # Component deployment (MDM + forms)
+│   ├── component_deployer.py # Component deployment (MDM + forms)
+│   └── instance_migrator.py  # Cross-instance migration
 ├── inventory.py              # Instance status & app comparison
 ├── database/                 # Database access
 │   ├── connection.py         # Connection pooling
 │   └── repositories/         # Repository pattern for queries
+│       ├── form_repository.py
+│       ├── datalist_repository.py
+│       └── userview_repository.py
 ├── discovery.py              # Form discovery from database
 ├── models.py                 # API response models (Pydantic)
+├── cli/                      # Command-line interface
+│   └── commands/
+│       ├── status.py         # Instance status command
+│       ├── forms.py          # Form deployment command
+│       ├── check.py          # Package validation command
+│       └── migrate.py        # Cross-instance migration command
 └── exceptions.py             # Error handling hierarchy
 ```
 
@@ -160,9 +252,64 @@ client = JogetClient(config)
 
 **Available Operations:**
 
-- **Forms**: `list_forms()`, `get_form()`, `create_form()`, `update_form()`, `delete_form()`
+- **Forms**: `list_forms()`, `get_form()`, `create_form()`, `update_form()`, `delete_form()`, `deploy_form()`
 - **Applications**: `list_applications()`, `export_application()`, `import_application()`
 - **Data**: `submit_form_data()`, `submit_batch()`
+- **Datalists**: `list_datalists()`, `get_datalist()`, `create_datalist()`, `update_datalist()`, `delete_datalist()`
+- **Userviews**: `list_userviews()`, `get_userview()`, `update_userview()`, `create_crud_menu()`, `add_menu_to_category()`
+
+### FormCreator Plugin Integration
+
+The `deploy_form()` method uses the **FormCreator API plugin** for reliable form deployment with automatic table creation and cache invalidation.
+
+**Plugin Repository:** [form-creator-api](https://github.com/aarelaponin/joget-form-creator-api)
+
+**Working Endpoint:** `POST /jw/api/formcreator/formcreator/forms`
+
+> **Note:** The redundant path (`formcreator/formcreator`) is a quirk of Joget's API plugin routing where `getTag()` and `@Operation(path)` are concatenated.
+
+#### API Credentials Setup
+
+Before using `deploy_form()`, create API credentials in Joget:
+
+1. Go to **Settings → API Key Manager → Add**
+2. Create a credential with:
+   - **API Name:** `formCreatorApi` (or any name)
+   - **Auth Type:** Simple
+3. Note the generated **API ID** and **API Key**
+
+#### Usage
+
+```python
+from joget_deployment_toolkit import JogetClient
+import json
+
+client = JogetClient.from_instance('jdx4')
+
+# Load form definition
+form_def = json.load(open("my_form.json"))
+
+# Deploy form using FormCreator plugin
+result = client.deploy_form(
+    app_id="farmersPortal",
+    form_definition=form_def,
+    api_id="API-4e39106c-67b1-4155-8c80-2f5ed6d1aae5",
+    api_key="b2cc0157ab464ff5b1f07a5907ef9690",
+    create_crud=True,   # Optional: create datalist + menu
+    create_api=False    # Optional: create REST API endpoint
+)
+
+print(f"Success: {result.success}")
+print(f"Form ID: {result.form_id}")
+```
+
+#### When to Use deploy_form() vs Direct Database
+
+| Method | Use Case |
+|--------|----------|
+| `deploy_form()` | Production deployment with plugin installed |
+| Direct DB insert | Quick prototyping, plugin not available |
+| `InstanceMigrator` | Cross-instance migration with data |
 
 ### 2. ComponentDeployer
 
@@ -201,7 +348,63 @@ results = deployer.deploy_all_mdm_from_directory(
 )
 ```
 
-### 4. FormDiscovery
+### 4. InstanceMigrator
+
+**Location:** `src/joget_deployment_toolkit/operations/instance_migrator.py`
+
+Migrate forms, datalists, data, and userview menus between Joget instances.
+
+```python
+from joget_deployment_toolkit import JogetClient, InstanceMigrator
+
+source = JogetClient.from_instance('jdx3')
+target = JogetClient.from_instance('jdx4')
+
+migrator = InstanceMigrator(source, target)
+
+# Analyze first (dry-run)
+analysis = migrator.analyze(
+    source_app_id='subsidyApplication',
+    target_app_id='farmersPortal',
+    pattern='md%',
+    userview_id='v',
+    category_label='Master Data'
+)
+print(analysis)
+
+# Execute migration
+result = migrator.migrate_app_component(
+    source_app_id='subsidyApplication',
+    target_app_id='farmersPortal',
+    pattern='md%',
+    with_data=True,
+    userview_id='v',
+    category_label='Master Data'
+)
+print(f"Migrated {result.forms_migrated} forms, {result.datalists_migrated} datalists")
+```
+
+**CLI Usage:**
+
+```bash
+# Dry-run to see what would be migrated
+joget-deploy migrate --source jdx3 --source-app subsidyApplication \
+                     --target jdx4 --target-app farmersPortal \
+                     --pattern "md%" --dry-run
+
+# Full migration with data and menu items
+joget-deploy migrate --source jdx3 --source-app subsidyApplication \
+                     --target jdx4 --target-app farmersPortal \
+                     --pattern "md%" --with-data \
+                     --userview v --category "Master Data"
+```
+
+**Important Notes:**
+- Category must already exist in target userview (create manually in Joget UI first)
+- Restart Tomcat on target instance after migration to clear Joget cache
+- Use `--dry-run` to preview what would be migrated
+
+### 5. FormDiscovery
 
 **Location:** `src/joget_deployment_toolkit/discovery.py`
 

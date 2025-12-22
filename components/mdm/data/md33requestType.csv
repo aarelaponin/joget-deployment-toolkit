@@ -1,0 +1,8 @@
+code,name,description,response_deadline_days,can_extend_deadline
+CLARIFICATION,Need Clarification on Responses,Farmer answers need clarification,7,Yes
+ADDITIONAL_DOC,Additional Document Required,Missing or additional document needed,14,Yes
+VERIFICATION,Information Needs Verification,Verify details with authorities,14,No
+UPDATE_PROFILE,Please Update Farmer Profile,Profile information needs updating,7,Yes
+FIELD_VISIT,Schedule Field Verification Visit,Arrange farm visit appointment,21,Yes
+CORRECTION,Correct Errors in Application,Fix errors or inconsistencies,7,Yes
+BANK_DETAILS,Provide/Correct Payment Details,Bank or mobile money info needed,7,Yes

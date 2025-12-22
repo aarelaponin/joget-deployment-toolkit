@@ -1,0 +1,19 @@
+id,code,name,category
+1,cattle-beef,Cattle (Beef),large_livestock
+2,cattle-dairy,Cattle (Dairy),large_livestock
+3,chicken-broiler,Chicken (Broiler),poultry
+4,chicken-village,Chicken (Village),poultry
+5,chicken-layers,Chicken (Layers),poultry
+6,ducks,Ducks,poultry
+7,guinea_fowl,Guinea Fowl,poultry
+8,other_poultry,Other Poultry,poultry
+9,game,Game,wildlife
+10,pigs,Pigs,large_livestock
+11,sheep,Sheep,small_livestock
+12,goats,Goats,small_livestock
+13,donkeys,Donkeys,working_animals
+14,horses,Horses,working_animals
+15,bees,Bees,other
+16,dogs,Dogs,other
+17,rabbits,Rabbits,small_livestock
+18,other,Other,other

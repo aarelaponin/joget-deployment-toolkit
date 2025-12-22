@@ -494,4 +494,132 @@ class FormOperations:
         )
 
 
+    # ========================================================================
+    # FormCreator Plugin Operations (Recommended)
+    # ========================================================================
+
+    def deploy_form(
+        self,
+        app_id: str,
+        form_definition: dict[str, Any],
+        *,
+        app_version: str = "1",
+        create_api: bool = False,
+        create_crud: bool = False,
+        api_id: str | None = None,
+        api_key: str | None = None,
+    ) -> FormResult:
+        """
+        Deploy form using the FormCreator API plugin.
+
+        This is the RECOMMENDED method for form deployment. It uses the
+        formcreator plugin which handles:
+        - Form definition registration
+        - Database table creation
+        - Cache invalidation
+        - Optional API endpoint creation
+        - Optional CRUD interface (datalist + userview menu)
+
+        Args:
+            app_id: Target application ID
+            form_definition: Complete form JSON definition (dict)
+            app_version: Application version (default: "1")
+            create_api: Create REST API endpoint for form data
+            create_crud: Create datalist + userview menu for CRUD operations
+            api_id: API ID for formcreator plugin (auto-detected if None)
+            api_key: Optional API key override
+
+        Returns:
+            FormResult with creation status and component IDs
+
+        Raises:
+            NotFoundError: If formcreator plugin is not installed
+            ValidationError: If form definition is invalid
+            JogetAPIError: On API errors
+
+        Example:
+            >>> form_def = json.load(open("md01maritalStatus.json"))
+            >>> result = client.deploy_form(
+            ...     app_id="farmersPortal",
+            ...     form_definition=form_def,
+            ...     create_crud=True  # Creates datalist + menu
+            ... )
+            >>> print(f"Form created: {result.form_id}")
+            >>> print(f"Datalist: {result.raw_data.get('datalistId')}")
+        """
+        props = form_definition.get("properties", {})
+        form_id = props.get("id")
+        form_name = props.get("name")
+        table_name = props.get("tableName", form_id)
+
+        if not form_id or not form_name:
+            raise ValidationError("Form definition must have 'id' and 'name' in properties")
+
+        if self.config.debug:
+            self.logger.debug(
+                f"Deploying form via formcreator plugin: {form_id} -> {app_id}"
+            )
+
+        # Prepare request payload for formcreator plugin
+        payload = {
+            "formId": form_id,
+            "formName": form_name,
+            "tableName": table_name,
+            "formDefinition": json.dumps(form_definition),
+            "targetAppId": app_id,
+            "targetAppVersion": app_version,
+            "createApiEndpoint": create_api,
+            "createCrud": create_crud,
+        }
+
+        try:
+            # Path: /api/{tag}/{operationPath} = /api/formcreator/formcreator/forms
+            # Note: The redundant path is a quirk of Joget's API plugin routing
+            response = self.post(
+                endpoint="/api/formcreator/formcreator/forms",
+                json=payload,
+                api_id=api_id,
+                api_key=api_key,
+            )
+
+            # The API returns: {"code": "200", "message": "{json_string}"}
+            # We need to parse the nested message JSON
+            raw_message = response.get("message", "")
+            if isinstance(raw_message, str) and raw_message.startswith("{"):
+                try:
+                    inner_response = json.loads(raw_message)
+                    success = inner_response.get("status") == "success"
+                    message = inner_response.get("message", "")
+                    result_form_id = inner_response.get("formId", form_id)
+                except json.JSONDecodeError:
+                    success = response.get("code") == "200"
+                    message = raw_message
+                    result_form_id = form_id
+            else:
+                success = response.get("status") == "success"
+                message = raw_message
+                result_form_id = response.get("formId", form_id)
+
+            if self.config.debug:
+                self.logger.debug(f"FormCreator response: {response}")
+
+            return FormResult(
+                success=success,
+                form_id=result_form_id,
+                message=message,
+                raw_data=response,
+            )
+
+        except Exception as e:
+            # Check if it's a 404 (plugin not installed)
+            error_str = str(e)
+            if "404" in error_str or "No endpoint" in error_str:
+                raise ValidationError(
+                    f"FormCreator plugin not installed on this Joget instance. "
+                    f"Install form-creator-api plugin or use direct database methods. "
+                    f"Original error: {e}"
+                ) from e
+            raise
+
+
 __all__ = ["FormOperations"]

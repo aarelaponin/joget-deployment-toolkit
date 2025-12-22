@@ -1,0 +1,22 @@
+id,code,name,crop_category
+1,maize,Maize,cereals
+2,sorghum,Sorghum,cereals
+3,rice,Rice,cereals
+4,millet,Millet,cereals
+5,wheat,Wheat,cereals
+6,groundnuts,Groundnuts,legumes
+7,soybeans,Soybeans,legumes
+8,potatoes,Potatoes,tubers
+9,mixed_beans,Mixed Beans,legumes
+10,sweet_potatoes,Sweet Potatoes,tubers
+11,cabbage,Cabbage,vegetables
+12,pigeon_peas,Pigeon Peas,legumes
+13,cowpeas,Cowpeas,legumes
+14,rape,Rape,vegetables
+15,spinach,Spinach,vegetables
+16,tomato,Tomato,vegetables
+17,onion,Onion,vegetables
+18,carrots,Carrots,vegetables
+19,pumpkin,Pumpkin,vegetables
+20,butternut,Butternut,vegetables
+28,other,Other,other

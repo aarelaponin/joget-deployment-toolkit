@@ -1,0 +1,13 @@
+code,name,category,duration_days,prerequisites,target_group
+CONSERVATION_AGRIC,Conservation Agriculture,Sustainable Farming,5,Basic literacy,All farmers
+PEST_MANAGEMENT,Integrated Pest Management,Crop Protection,3,None,Crop farmers
+SOIL_MANAGEMENT,Soil Health Management,Soil Science,4,Basic literacy,All farmers
+IRRIGATION_TECH,Irrigation Techniques,Water Management,3,None,All farmers
+LIVESTOCK_MGMT,Livestock Management,Animal Husbandry,5,Have livestock,Livestock farmers
+POST_HARVEST,Post-Harvest Handling,Processing,3,Basic literacy,All farmers
+ORGANIC_FARMING,Organic Farming,Sustainable Farming,5,Basic literacy,All farmers
+CLIMATE_SMART,Climate-Smart Agriculture,Climate Adaptation,4,Basic literacy,All farmers
+FARM_BUSINESS,Farm Business Management,Entrepreneurship,5,Basic literacy,All farmers
+CROP_ROTATION,Crop Rotation Planning,Agronomy,2,None,Crop farmers
+GREENHOUSE,Greenhouse Management,Protected Cultivation,4,Basic literacy,Vegetable farmers
+BEEKEEPING,Beekeeping,Diversification,3,None,All farmers

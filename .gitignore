@@ -91,3 +91,4 @@ deploy_*.py
 *.env
 credentials.json
 secrets.yaml
+*.DS_Store

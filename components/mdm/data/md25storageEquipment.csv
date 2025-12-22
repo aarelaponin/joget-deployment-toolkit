@@ -1,0 +1,11 @@
+code,name,storage_type,capacity,estimated_cost_lsl,material
+METAL_SILO_SMALL,Small Metal Silo,Grain,1-2 tonnes,12000,Galvanized steel
+METAL_SILO_MEDIUM,Medium Metal Silo,Grain,3-5 tonnes,22000,Galvanized steel
+METAL_SILO_LARGE,Large Metal Silo,Grain,8-10 tonnes,45000,Galvanized steel
+HERMETIC_BAG_50KG,Hermetic Storage Bags (50kg),Grain,50kg,80,Plastic (per bag)
+HERMETIC_BAG_100KG,Hermetic Storage Bags (100kg),Grain,100kg,120,Plastic (per bag)
+STORAGE_BIN_PLASTIC,Plastic Storage Bin,General,200-500L,1500,Plastic
+COLD_STORAGE_SMALL,Small Cold Storage Unit,Vegetables,2-5 cubic metres,55000,Insulated
+DRYING_RACK,Crop Drying Rack,Drying,Variable,3500,Metal/Wood
+TARPAULIN_LARGE,Large Storage Tarpaulin,Protection,6m x 8m,800,Waterproof fabric
+GRAIN_BAG_TREATED,Treated Grain Storage Bags,Grain,90kg,150,Woven plastic

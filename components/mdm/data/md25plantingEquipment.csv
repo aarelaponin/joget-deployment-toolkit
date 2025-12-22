@@ -1,0 +1,9 @@
+code,name,planting_type,estimated_cost_lsl,capacity
+PLANTER_MANUAL,Manual Seed Planter,Manual,800,Small plots
+PLANTER_MAIZE_SINGLE,Single-Row Maize Planter,Animal,4500,1 row
+PLANTER_MAIZE_MULTI,Multi-Row Maize Planter,Tractor,18000,4-6 rows
+PLANTER_VEGETABLE,Vegetable Precision Planter,Manual/Tractor,12000,Variable
+DIBBER,Seed Dibber,Manual,200,Manual planting
+TRANSPLANTER,Seedling Transplanter,Manual/Tractor,8000,Variable
+BROADCASTER,Fertilizer Broadcaster,Manual/Tractor,3500,Variable
+SEED_DRILL,Seed Drill,Animal/Tractor,15000,Multiple rows

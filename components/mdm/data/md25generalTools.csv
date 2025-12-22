@@ -1,0 +1,11 @@
+code,name,tool_category,estimated_cost_lsl,typical_quantity
+HAND_HOE,Hand Hoe,Weeding,250,2-5
+SPADE,Spade,Digging,300,2-3
+FORK,Garden Fork,Digging,350,1-2
+RAKE,Rake,Leveling,200,2-3
+MACHETE,Machete/Slasher,Cutting,180,2-4
+PRUNING_SHEARS,Pruning Shears,Pruning,400,1-2
+WATERING_CAN,Watering Can,Irrigation,250,2-5
+MEASURING_TAPE,Measuring Tape (50m),Measuring,800,1
+BUCKET_PLASTIC,Plastic Bucket (20L),General,120,5-10
+HAND_TOOLS_SET,Complete Hand Tools Set,Mixed,2500,1

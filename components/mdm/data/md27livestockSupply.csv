@@ -1,0 +1,11 @@
+code,name,category,default_unit,typical_quantity,estimated_cost_per_unit
+VACCINE_FMD,Foot & Mouth Disease Vaccine,Vaccine,doses,10-50 doses,15
+VACCINE_ANTHRAX,Anthrax Vaccine,Vaccine,doses,10-50 doses,12
+VACCINE_RABIES,Rabies Vaccine,Vaccine,doses,5-20 doses,20
+DEWORMER_CATTLE,Cattle Dewormer,Medicine,doses,10-50 doses,8
+DEWORMER_SHEEP,Sheep/Goat Dewormer,Medicine,doses,20-100 doses,5
+ANTIBIOTICS,General Antibiotics,Medicine,doses,5-20 doses,25
+FEED_CONCENTRATE,Livestock Feed Concentrate,Feed,50kg_bags,10-50 bags,350
+FEED_SUPPLEMENT,Mineral Supplement,Feed,kg,5-20 kg,45
+DIPPING_CHEMICAL,Dipping Chemical,Pest Control,litres,10-50 litres,180
+SPRAYING_CHEM,Livestock Spray,Pest Control,litres,2-10 litres,95

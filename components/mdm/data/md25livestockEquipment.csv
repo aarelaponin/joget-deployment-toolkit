@@ -1,0 +1,14 @@
+code,name,equipment_type,estimated_cost_lsl,purpose
+MILKING_MACHINE_MANUAL,Manual Milking Machine,Milking,8000,Dairy
+MILKING_MACHINE_ELECTRIC,Electric Milking Machine,Milking,25000,Dairy
+MILK_CAN,Stainless Milk Can (40L),Storage,1500,Dairy
+WATER_TROUGH,Livestock Water Trough,Feeding,2500,Watering
+FEED_TROUGH,Feed Trough,Feeding,1800,Feeding
+SCALE_LIVESTOCK,Livestock Weighing Scale,Measurement,15000,Weight monitoring
+EAR_TAG_KIT,Ear Tagging Kit,Identification,2000,ID/Records
+CRUSH_SYSTEM,Cattle Crush System,Handling,35000,Animal handling
+ELECTRIC_FENCE,Electric Fence Kit,Fencing,8000,Grazing management
+SHEARING_MACHINE,Sheep Shearing Machine,Wool,12000,Sheep/Goats
+INCUBATOR_SMALL,Small Egg Incubator,Poultry,4500,Egg hatching
+FEEDERS_POULTRY,Poultry Feeders,Feeding,800,Poultry
+DRINKERS_POULTRY,Poultry Drinkers,Watering,600,Poultry

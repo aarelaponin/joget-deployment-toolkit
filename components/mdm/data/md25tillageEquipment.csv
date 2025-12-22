@@ -1,0 +1,11 @@
+code,name,power_source,estimated_cost_lsl,typical_lifespan_years,maintenance_level
+PLOUGH_ANIMAL,Animal-Drawn Plough,Animal,3500,8,Low
+PLOUGH_TRACTOR_SINGLE,Single-Bottom Tractor Plough,Tractor,15000,15,Medium
+PLOUGH_TRACTOR_DOUBLE,Double-Bottom Tractor Plough,Tractor,25000,15,Medium
+DISC_HARROW,Disc Harrow,Tractor,18000,12,Medium
+HARROW_SPIKE,Spike Harrow,Animal/Tractor,4000,10,Low
+CULTIVATOR_ANIMAL,Animal-Drawn Cultivator,Animal,3000,8,Low
+CULTIVATOR_TRACTOR,Tractor Cultivator,Tractor,22000,15,Medium
+RIDGER,Ridger/Bed Former,Tractor,12000,12,Low
+SUBSOILER,Subsoiler,Tractor,35000,15,Medium
+ROTAVATOR,Rotary Tiller,Tractor,45000,12,High

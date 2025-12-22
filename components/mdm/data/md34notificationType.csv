@@ -1,0 +1,14 @@
+code,name,template_id,send_via_sms,send_via_email,send_via_push,priority
+APP_SUBMITTED,Application Submitted Confirmation,TPL_001,Yes,Yes,Yes,High
+APP_RECEIVED,Application Received,TPL_002,Yes,Yes,No,Medium
+ELIGIBILITY_PASSED,Eligibility Check Passed,TPL_003,Yes,Yes,Yes,High
+ELIGIBILITY_FAILED,Eligibility Check Failed,TPL_004,Yes,Yes,Yes,High
+DOC_UNDER_REVIEW,Documents Under Review,TPL_005,Yes,No,No,Low
+INFO_REQUESTED,Additional Information Requested,TPL_006,Yes,Yes,Yes,High
+FIELD_VISIT_SCHEDULED,Field Visit Scheduled,TPL_007,Yes,Yes,Yes,High
+APP_APPROVED,Application Approved,TPL_008,Yes,Yes,Yes,Critical
+APP_REJECTED,Application Rejected,TPL_009,Yes,Yes,Yes,Critical
+BENEFIT_READY,Benefit Ready for Collection,TPL_010,Yes,Yes,Yes,Critical
+REMINDER,Reminder/Deadline Notice,TPL_011,Yes,Yes,No,Medium
+STATUS_UPDATE,Status Update,TPL_012,No,Yes,Yes,Low
+DEADLINE_WARNING,Application Deadline Warning,TPL_013,Yes,Yes,Yes,High

@@ -1,0 +1,9 @@
+code,name,description
+INPUT_SUBSIDY,Input Subsidy,Seeds/fertilizer/pesticides support
+CASH_TRANSFER,Cash Transfer,Direct cash payments
+VOUCHER,Voucher Program,E-vouchers for inputs
+EQUIPMENT,Equipment Support,Farm equipment and tools
+TRAINING,Training Support,Agricultural training courses
+LIVESTOCK,Livestock Support,Livestock and veterinary support
+MIXED,Mixed Program,Combination of support types
+EMERGENCY,Emergency Relief,Disaster/emergency support

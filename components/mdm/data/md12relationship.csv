@@ -1,0 +1,9 @@
+id,code,name
+1,head,Head
+2,spouse,Spouse
+3,child,Child (own/step)
+4,parent,Parent/Parent in-law
+5,sibling,Brother/Sister
+6,other,Other Relatives
+7,self,Self
+8,unrelated,Unrelated

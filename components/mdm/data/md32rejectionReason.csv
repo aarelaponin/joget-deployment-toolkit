@@ -1,0 +1,15 @@
+code,name,category,farmer_message,can_reapply
+NOT_ELIGIBLE,Does Not Meet Eligibility Criteria,Eligibility,You don't meet program requirements,No
+INCOMPLETE_DOCS,Incomplete Documentation,Documentation,Please submit all required documents,Yes
+INVALID_DOCS,Invalid/Unreadable Documents,Documentation,Documents are not clear or valid,Yes
+DUPLICATE_APP,Duplicate Application,Validation,You already applied for this program,No
+BUDGET_EXHAUSTED,Program Budget Exhausted,Budget,Program funds have been fully allocated,No
+MISREPRESENTATION,False Information Provided,Fraud,Information provided is not accurate,No
+LATE_SUBMISSION,Submitted After Deadline,Timing,Application period has closed,No
+NO_RESPONSE,No Response to Info Request,Communication,You didn't respond to our request,Yes
+FARM_NOT_VERIFIED,Farm Could Not Be Verified,Verification,Unable to verify farm details,Yes
+CONFLICTING_DATA,Data Conflicts with Records,Validation,Information conflicts with our records,Yes
+INELIGIBLE_DISTRICT,Not in Target District,Eligibility,Your district is not covered by this program,No
+LAND_SIZE,Land Size Outside Range,Eligibility,Your land doesn't meet size requirements,No
+PREVIOUS_BENEFICIARY,Already Benefited from Similar Program,Eligibility,You received similar benefit recently,No
+OTHER,Other Reason,General,See detailed explanation,Varies

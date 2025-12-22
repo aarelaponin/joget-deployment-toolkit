@@ -1,0 +1,11 @@
+code,name,category,default_unit,typical_quantity,estimated_cost_per_unit
+PIPE_PVC_50MM,PVC Pipe 50mm,Pipes,metres,50-500m,18
+PIPE_PVC_75MM,PVC Pipe 75mm,Pipes,metres,50-500m,28
+PIPE_PVC_110MM,PVC Pipe 110mm,Pipes,metres,50-500m,42
+DRIP_TAPE,Drip Irrigation Tape,Drip System,metres,100-1000m,5
+DRIP_EMITTER,Drip Emitters,Drip System,pieces,100-1000,3
+SPRINKLER_HEAD,Sprinkler Heads,Sprinkler System,pieces,10-50,85
+FITTING_ELBOW,Pipe Elbows,Fittings,pieces,20-100,8
+FITTING_TEE,Pipe Tees,Fittings,pieces,20-100,10
+VALVE,Control Valves,Controls,pieces,5-20,120
+FILTER,Water Filter,Controls,pieces,1-5,450

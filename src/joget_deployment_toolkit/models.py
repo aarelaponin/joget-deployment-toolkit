@@ -32,6 +32,61 @@ class FormInfo:
     form_definition: dict[str, Any] | None = None
 
 
+@dataclass
+class DatalistInfo:
+    """Information about a datalist in Joget"""
+
+    id: str
+    name: str
+    description: str | None = None
+    app_id: str = ""
+    app_version: str = "1"
+    json_definition: dict[str, Any] | None = None
+
+    def __str__(self):
+        return f"Datalist({self.id}: {self.name})"
+
+
+@dataclass
+class UserviewInfo:
+    """Information about a userview in Joget"""
+
+    id: str
+    name: str
+    description: str | None = None
+    app_id: str = ""
+    app_version: str = "1"
+    json_definition: dict[str, Any] | None = None
+
+    def __str__(self):
+        return f"Userview({self.id}: {self.name})"
+
+
+@dataclass
+class MigrationResult:
+    """Result of a migration operation between instances."""
+
+    success: bool
+    forms_migrated: int = 0
+    datalists_migrated: int = 0
+    data_records_copied: int = 0
+    menus_added: int = 0
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+
+    def __str__(self):
+        status = "Success" if self.success else "Failed"
+        return (
+            f"{status}: {self.forms_migrated} forms, "
+            f"{self.datalists_migrated} datalists, "
+            f"{self.data_records_copied} records, "
+            f"{self.menus_added} menus"
+        )
+
+    def has_errors(self) -> bool:
+        return len(self.errors) > 0
+
+
 class JogetConfig(BaseModel):
     """Configuration for Joget connection"""
 
@@ -370,6 +425,30 @@ def plugin_info_from_dict(data: dict[str, Any]) -> PluginInfo:
         description=data.get("description"),
         class_name=data.get("className"),
         raw_data=data,
+    )
+
+
+def datalist_info_from_dict(data: dict[str, Any]) -> DatalistInfo:
+    """Create DatalistInfo from API response dictionary."""
+    return DatalistInfo(
+        id=data.get("id", ""),
+        name=data.get("name", ""),
+        description=data.get("description"),
+        app_id=data.get("appId", ""),
+        app_version=data.get("appVersion", "1"),
+        json_definition=data.get("json"),
+    )
+
+
+def userview_info_from_dict(data: dict[str, Any]) -> UserviewInfo:
+    """Create UserviewInfo from API response dictionary."""
+    return UserviewInfo(
+        id=data.get("id", ""),
+        name=data.get("name", ""),
+        description=data.get("description"),
+        app_id=data.get("appId", ""),
+        app_version=data.get("appVersion", "1"),
+        json_definition=data.get("json"),
     )
 
 

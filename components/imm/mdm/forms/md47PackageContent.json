@@ -2,7 +2,7 @@
   "className": "org.joget.apps.form.model.Form",
   "properties": {
     "id": "md47PackageContent",
-    "name": "Package Content",
+    "name": "MD.47 - Package Content",
     "tableName": "md47PackageContent",
     "description": "Items that make up an input package",
     "loadBinder": {
@@ -39,39 +39,110 @@
           },
           "elements": [
             {
-              "className": "org.joget.apps.form.lib.HiddenField",
+              "className": "org.joget.apps.form.lib.TextField",
               "properties": {
-                "id": "id",
-                "value": ""
+                "id": "code",
+                "label": "Content Code",
+                "encryption": "",
+                "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
+                "value": "",
+                "maxlength": "30",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
+              }
+            },
+            {
+              "className": "org.joget.apps.form.lib.TextField",
+              "properties": {
+                "id": "name",
+                "label": "Content Name",
+                "encryption": "",
+                "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
+                "value": "",
+                "maxlength": "100",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.HiddenField",
               "properties": {
+                "useDefaultWhenEmpty": "",
                 "id": "packageCode",
-                "value": ""
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "inputCode",
-                "label": "Input",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Input",
+                "readonlyLabel": "",
+                "id": "inputCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "md44Input",
                     "idColumn": "code",
                     "labelColumn": "name",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Select Input --",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -79,96 +150,114 @@
               "properties": {
                 "id": "quantity",
                 "label": "Quantity",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
-                "placeholder": "0",
+                "maxlength": "",
                 "validator": {
-                  "className": "org.joget.apps.form.lib.MultiValidator",
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "validators": [
-                      {
-                        "className": "org.joget.apps.form.lib.DefaultValidator",
-                        "properties": {
-                          "mandatory": "true"
-                        }
-                      },
-                      {
-                        "className": "org.joget.apps.form.lib.RegexValidator",
-                        "properties": {
-                          "regex": "^[0-9]+$",
-                          "message": "Please enter numbers only"
-                        }
-                      }
-                    ]
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "0",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "unit",
-                "label": "Unit",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "kg",
-                        "label": "kg"
-                      },
-                      {
-                        "value": "litre",
-                        "label": "L"
-                      },
-                      {
-                        "value": "packet",
-                        "label": "packet"
-                      },
-                      {
-                        "value": "piece",
-                        "label": "piece"
-                      },
-                      {
-                        "value": "dose",
-                        "label": "dose"
-                      }
-                    ]
+                "label": "Unit",
+                "readonlyLabel": "",
+                "id": "unit",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "kg",
+                    "label": "kg",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "litre",
+                    "label": "L",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "packet",
+                    "label": "packet",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "piece",
+                    "label": "piece",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "dose",
+                    "label": "dose",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "isOptional",
-                "label": "Optional Item",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Optional Item",
+                "readonlyLabel": "",
+                "id": "isOptional",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "N",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -176,13 +265,8 @@
               "properties": {
                 "id": "substitutes",
                 "label": "Allowed Substitutes",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
                 "maxlength": "200",
-                "placeholder": "e.g., INPUT1;INPUT2",
-                "encryption": ""
+                "placeholder": "e.g., INPUT1;INPUT2"
               }
             },
             {
@@ -190,22 +274,12 @@
               "properties": {
                 "id": "notes",
                 "label": "Notes",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "maxlength": "200",
-                "encryption": ""
+                "maxlength": "200"
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

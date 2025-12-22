@@ -1,0 +1,15 @@
+code,name,applies_to_type,symbol
+EQUALS,Equals,Text;Number;Date;Boolean,=
+NOT_EQUALS,Not Equals,Text;Number;Date;Boolean,≠
+GREATER_THAN,Greater Than,Number;Date,>
+LESS_THAN,Less Than,Number;Date,
+GREATER_EQUAL,Greater Than or Equal,Number;Date,≥
+LESS_EQUAL,Less Than or Equal,Number;Date,≤
+BETWEEN,Between,Number;Date,>
+IN_LIST,Is One Of,Text;Number,∈
+NOT_IN_LIST,Is Not One Of,Text;Number,∉
+CONTAINS,Contains,Text,⊃
+STARTS_WITH,Starts With,Text,^
+IS_EMPTY,Is Empty,All,∅
+IS_NOT_EMPTY,Is Not Empty,All,¬∅
+INCLUDES,Includes (multi-select),Array,∈

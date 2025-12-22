@@ -1,0 +1,11 @@
+code,name,pesticide_type,default_unit,typical_quantity_per_ha,target,estimated_cost_per_unit
+INSECT_GENERAL,General Purpose Insecticide,Insecticide,litres,2-5 litres,General insects,120
+INSECT_APHID,Aphid Control,Insecticide,litres,1-3 litres,Aphids,150
+INSECT_BOLLWORM,Bollworm Control,Insecticide,litres,2-4 litres,Bollworms,140
+HERB_BROADLEAF,Broadleaf Herbicide,Herbicide,litres,2-5 litres,Broadleaf weeds,180
+HERB_GRASS,Grass Herbicide,Herbicide,litres,2-5 litres,Grass weeds,160
+HERB_PREEMERGENT,Pre-emergent Herbicide,Herbicide,litres,3-6 litres,Weed prevention,200
+FUNG_RUST,Rust Control,Fungicide,litres,1-3 litres,Rust diseases,250
+FUNG_BLIGHT,Blight Control,Fungicide,litres,1-3 litres,Blight,240
+FUNG_MILDEW,Mildew Control,Fungicide,litres,1-3 litres,Mildew,230
+RODENT,Rodenticide,Rodenticide,kg,1-2 kg,Rodents,90

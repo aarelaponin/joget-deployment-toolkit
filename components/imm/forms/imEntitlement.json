@@ -39,80 +39,91 @@
           },
           "elements": [
             {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
               "className": "org.joget.apps.form.lib.IdGeneratorField",
               "properties": {
                 "id": "entitlementCode",
                 "label": "Entitlement Code",
-                "value": "",
-                "readonly": "true",
-                "format": "{prefix}{date:yyyyMM}-{count:06d}",
-                "prefix": "ENT-",
-                "postfix": "",
-                "environmentVariable": ""
+                "format": "ENT-??????",
+                "envVariable": "counter",
+                "isDistributedGeneration": "",
+                "hidden": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "campaignId",
-                "label": "Campaign",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Campaign",
+                "readonlyLabel": "",
+                "id": "campaignCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "imCampaign",
-                    "idColumn": "id",
+                    "idColumn": "campaignCode",
                     "labelColumn": "campaignName",
+                    "groupingColumn": "",
+                    "extraCondition": "c_status IN ('APPROVED', 'ACTIVE')",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Select Campaign --",
-                    "useAjax": "false",
-                    "extraCondition": "c_status IN ('APPROVED', 'ACTIVE')"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
-              }
-            },
-            {
-              "className": "org.joget.apps.form.lib.TextField",
-              "properties": {
-                "id": "campaignCode",
-                "label": "Campaign Code",
-                "required": "",
-                "readonly": "true",
+                },
                 "value": "",
-                "size": "medium",
-                "encryption": ""
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "farmerId",
-                "label": "Farmer",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Farmer",
+                "readonlyLabel": "",
+                "id": "farmerCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "farmerBasicInfo",
-                    "idColumn": "id",
+                    "idColumn": "code",
                     "labelColumn": "fullName",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Select Farmer --",
-                    "useAjax": "true"
+                    "useAjax": "true",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -120,11 +131,7 @@
               "properties": {
                 "id": "farmerNationalId",
                 "label": "National ID",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -132,11 +139,7 @@
               "properties": {
                 "id": "farmerName",
                 "label": "Farmer Name",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "large",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -144,18 +147,7 @@
               "properties": {
                 "id": "farmerPhone",
                 "label": "Phone",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "validator": {
-                  "className": "org.joget.apps.form.lib.RegexValidator",
-                  "properties": {
-                    "regex": "^[+]?[0-9\\s\\-()]+$",
-                    "message": "Please enter a valid phone number"
-                  }
-                },
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -163,35 +155,43 @@
               "properties": {
                 "id": "districtCode",
                 "label": "District",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "distPointCode",
-                "label": "Assigned Distribution Point",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Assigned Distribution Point",
+                "readonlyLabel": "",
+                "id": "distPointCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "imCampaignDistPt",
                     "idColumn": "distPointCode",
                     "labelColumn": "distPointName",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Auto-assign --",
                     "useAjax": "true",
-                    "parentField": "campaignId",
-                    "filterField": "campaignId"
+                    "cacheInterval": "",
+                    "parentField": "campaignCode",
+                    "filterField": "campaignCode"
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -199,11 +199,7 @@
               "properties": {
                 "id": "distPointName",
                 "label": "Distribution Point Name",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -211,49 +207,157 @@
               "properties": {
                 "id": "scheduledDate",
                 "label": "Scheduled Collection Date",
-                "required": "",
                 "readonly": "",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "packageCode",
-                "label": "Input Package",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Input Package",
+                "readonlyLabel": "",
+                "id": "packageCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
-                    "formDefId": "md44InputPackage",
+                    "formDefId": "md46InputPackage",
                     "idColumn": "code",
                     "labelColumn": "name",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Custom allocation --",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.plugin.enterprise.FormGrid",
               "properties": {
-                "id": "entitlementItems",
+                "showRowNumber": "",
+                "disabledDelete": "true",
+                "errorMessage": "",
+                "deleteSubformData": "",
+                "pageSize": "20",
                 "label": "Entitlement Items",
-                "formDefId": "imEntitlementItem",
-                "columns": [],
+                "enableSorting": "",
+                "deleteFiles": "",
                 "readonly": "true",
+                "deleteGridData": "",
+                "disabledAdd": "true",
+                "width": "",
+                "abortRelatedRunningProcesses": "",
+                "readonlyLabel": "",
+                "height": "",
+                "id": "entitlementItems",
+                "formDefId": "imEntitlementItem",
+                "options": [
+                  {
+                    "value": "inputCode",
+                    "label": "Input",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "qtyEntitled",
+                    "label": "Qty",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "unit",
+                    "label": "Unit",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "subsidyAmount",
+                    "label": "Subsidy",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "farmerContrib",
+                    "label": "Farmer Pays",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "qtyRedeemed",
+                    "label": "Redeemed",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "itemStatus",
+                    "label": "Status",
+                    "formatType": "options",
+                    "format": "",
+                    "width": ""
+                  }
+                ],
+                "submit-label-normal": "",
+                "submit-label-readonly": "",
+                "deleteMessage": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "uniqueKey": "",
                 "validateMinRow": "",
                 "validateMaxRow": "",
-                "allowAddRow": "false",
-                "allowDeleteRow": "false",
-                "errorMessage": ""
+                "loadBinder": {
+                  "className": "org.joget.plugin.enterprise.MultirowFormBinder",
+                  "properties": {
+                    "formDefId": "imEntitlementItem",
+                    "foreignKey": "entitlementCode"
+                  }
+                },
+                "storeBinder": {
+                  "className": "org.joget.plugin.enterprise.MultirowFormBinder",
+                  "properties": {
+                    "formDefId": "imEntitlementItem",
+                    "foreignKey": "entitlementCode"
+                  }
+                },
+                "requestParams": []
               }
             },
             {
@@ -261,11 +365,8 @@
               "properties": {
                 "id": "totalEntitleValue",
                 "label": "Total Entitlement Value",
-                "required": "",
                 "readonly": "true",
-                "value": "0.00",
-                "size": "medium",
-                "encryption": ""
+                "value": "0.00"
               }
             },
             {
@@ -273,11 +374,8 @@
               "properties": {
                 "id": "totalSubsidyValue",
                 "label": "Total Subsidy Value",
-                "required": "",
                 "readonly": "true",
-                "value": "0.00",
-                "size": "medium",
-                "encryption": ""
+                "value": "0.00"
               }
             },
             {
@@ -285,11 +383,8 @@
               "properties": {
                 "id": "farmerContribTotal",
                 "label": "Farmer Contribution",
-                "required": "",
                 "readonly": "true",
-                "value": "0.00",
-                "size": "medium",
-                "encryption": ""
+                "value": "0.00"
               }
             },
             {
@@ -297,11 +392,8 @@
               "properties": {
                 "id": "eligibilityScore",
                 "label": "Eligibility Score",
-                "required": "",
                 "readonly": "true",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             },
             {
@@ -309,24 +401,26 @@
               "properties": {
                 "id": "priorityRank",
                 "label": "Priority Rank",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
               "className": "org.joget.apps.form.lib.TextArea",
               "properties": {
-                "id": "calculationDetails",
-                "label": "Calculation Details",
-                "required": "",
                 "readonly": "true",
-                "value": "",
+                "label": "Calculation Details",
                 "rows": "4",
                 "cols": "50",
-                "encryption": ""
+                "readonlyLabel": "",
+                "id": "calculationDetails",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "placeholder": "",
+                "encryption": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -343,11 +437,7 @@
               "properties": {
                 "id": "voucherCode",
                 "label": "Voucher Code",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -366,12 +456,25 @@
               "properties": {
                 "id": "voucherIssueDate",
                 "label": "Voucher Issue Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -379,12 +482,25 @@
               "properties": {
                 "id": "voucherExpiry",
                 "label": "Voucher Expiry Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -392,101 +508,127 @@
               "properties": {
                 "id": "voucherBalance",
                 "label": "Voucher Balance",
-                "required": "",
                 "readonly": "true",
-                "value": "0.00",
-                "size": "medium",
-                "encryption": ""
+                "value": "0.00"
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "status",
+                "readonly": "",
+                "multiple": "",
                 "label": "Status",
-                "required": "true",
-                "readonly": "",
-                "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "CALCULATED",
-                        "label": "Calculated"
-                      },
-                      {
-                        "value": "APPROVED",
-                        "label": "Approved"
-                      },
-                      {
-                        "value": "VOUCHER_ISSUED",
-                        "label": "Voucher Issued"
-                      },
-                      {
-                        "value": "READY",
-                        "label": "Ready for Collection"
-                      },
-                      {
-                        "value": "PARTIAL",
-                        "label": "Partially Redeemed"
-                      },
-                      {
-                        "value": "COMPLETE",
-                        "label": "Fully Redeemed"
-                      },
-                      {
-                        "value": "EXPIRED",
-                        "label": "Expired"
-                      },
-                      {
-                        "value": "CANCELLED",
-                        "label": "Cancelled"
-                      }
-                    ]
+                "readonlyLabel": "",
+                "id": "status",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "CALCULATED",
+                    "label": "Calculated",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "APPROVED",
+                    "label": "Approved",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "VOUCHER_ISSUED",
+                    "label": "Voucher Issued",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "READY",
+                    "label": "Ready for Collection",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "PARTIAL",
+                    "label": "Partially Redeemed",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "COMPLETE",
+                    "label": "Fully Redeemed",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "EXPIRED",
+                    "label": "Expired",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "CANCELLED",
+                    "label": "Cancelled",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "CALCULATED",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "collectionStatus",
-                "label": "Collection Status",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "PENDING",
-                        "label": "Pending"
-                      },
-                      {
-                        "value": "SCHEDULED",
-                        "label": "Scheduled"
-                      },
-                      {
-                        "value": "NOTIFIED",
-                        "label": "Notified"
-                      },
-                      {
-                        "value": "COLLECTED",
-                        "label": "Collected"
-                      },
-                      {
-                        "value": "NOT_COLLECTED",
-                        "label": "Not Collected"
-                      }
-                    ]
+                "label": "Collection Status",
+                "readonlyLabel": "",
+                "id": "collectionStatus",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "PENDING",
+                    "label": "Pending",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "SCHEDULED",
+                    "label": "Scheduled",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "NOTIFIED",
+                    "label": "Notified",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "COLLECTED",
+                    "label": "Collected",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "NOT_COLLECTED",
+                    "label": "Not Collected",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "PENDING",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -494,12 +636,25 @@
               "properties": {
                 "id": "createdDate",
                 "label": "Created Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd HH:mm",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd HH:mm",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -507,12 +662,25 @@
               "properties": {
                 "id": "approvedDate",
                 "label": "Approved Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd HH:mm",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd HH:mm",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -520,12 +688,25 @@
               "properties": {
                 "id": "firstRedemptionDate",
                 "label": "First Redemption Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd HH:mm",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd HH:mm",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -533,37 +714,58 @@
               "properties": {
                 "id": "completionDate",
                 "label": "Completion Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd HH:mm",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd HH:mm",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "smsNotifSent",
-                "label": "SMS Notification Sent",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "SMS Notification Sent",
+                "readonlyLabel": "",
+                "id": "smsNotifSent",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "N",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -571,22 +773,30 @@
               "properties": {
                 "id": "smsNotifDate",
                 "label": "SMS Sent Date",
-                "required": "",
                 "readonly": "true",
+                "allowManual": "",
+                "yearRange": "c-10:c+10",
+                "dataFormat": "yyyy-MM-dd HH:mm",
+                "datePickerType": "",
+                "currentDateAs": "",
+                "disableWeekends": "",
+                "readonlyLabel": "",
+                "iconIncluded": false,
                 "value": "",
-                "format": "yyyy-MM-dd HH:mm",
-                "yearRange": "c-100:c+10",
-                "currentDateAs": ""
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "startDateFieldId": "",
+                "endDateFieldId": "",
+                "placeholder": "",
+                "format": "",
+                "workflowVariable": ""
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

@@ -1,0 +1,10 @@
+code,name,description,typical_subsidy_percent,requires_training
+TILLAGE,Tillage Equipment,Land preparation equipment,60,Yes
+PLANTING,Planting Equipment,Seeding and planting tools,60,Yes
+PEST_CONTROL,Pest Control Equipment,Spraying and application equipment,70,Yes
+IRRIGATION,Irrigation Equipment,Water management systems,80,Yes
+STORAGE,Storage Equipment,Post-harvest storage,65,No
+PROCESSING,Processing Equipment,Threshing and processing equipment,50,Yes
+TRANSPORT,Transport Equipment,Farm transport and handling,40,No
+GENERAL_TOOLS,General Farm Tools,Hand tools and implements,70,No
+LIVESTOCK_EQUIP,Livestock Equipment,Animal husbandry equipment,60,Yes

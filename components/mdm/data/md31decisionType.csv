@@ -1,0 +1,8 @@
+code,name,is_final,requires_reason,triggers_payment
+APPROVED,Approved,Yes,No,Yes
+REJECTED,Rejected,Yes,Yes,No
+PENDING_INFO,Pending Additional Information,No,Yes,No
+CONDITIONALLY_APPROVED,Conditionally Approved,No,Yes,No
+ESCALATED,Escalated for Review,No,Yes,No
+UNDER_INVESTIGATION,Under Investigation,No,Yes,No
+PARTIAL_APPROVAL,Partially Approved,Yes,Yes,Yes

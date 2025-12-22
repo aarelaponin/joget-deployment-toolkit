@@ -1,0 +1,8 @@
+code,name,transport_type,capacity,estimated_cost_lsl
+WHEELBARROW_STANDARD,Standard Wheelbarrow,Manual,100kg,600
+WHEELBARROW_HEAVY,Heavy-Duty Wheelbarrow,Manual,150kg,1200
+CART_ANIMAL,Animal-Drawn Cart,Animal,500-1000kg,8500
+TRAILER_TRACTOR_SMALL,Small Tractor Trailer,Tractor,1-2 tonnes,25000
+TRAILER_TRACTOR_LARGE,Large Tractor Trailer,Tractor,3-5 tonnes,45000
+HANDCART,Two-Wheel Hand Cart,Manual,200kg,2500
+TROLLEY_PLATFORM,Platform Trolley,Manual,300kg,1800

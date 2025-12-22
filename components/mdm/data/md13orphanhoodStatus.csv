@@ -1,0 +1,6 @@
+id,code,name
+1,both_alive,Both Parents Alive
+2,mother_only,Only Mother Alive
+3,father_only,Only Father Alive
+4,both_deceased,Both Deceased
+5,unknown,Unknown

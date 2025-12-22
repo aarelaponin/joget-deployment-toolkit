@@ -1,0 +1,9 @@
+code,name,sprayer_type,capacity_litres,estimated_cost_lsl,power_source
+KNAPSACK_MANUAL,Manual Knapsack Sprayer,Knapsack,15-20,800,Manual pump
+KNAPSACK_PRESSURE,Pressure Knapsack Sprayer,Knapsack,15-20,1500,Manual pump
+BACKPACK_MOTORIZED,Motorized Backpack Sprayer,Backpack,15-20,6500,Petrol engine
+BOOM_SPRAYER_TRACTOR,Tractor-Mounted Boom Sprayer,Boom,200-500,35000,Tractor PTO
+MIST_BLOWER,Mist Blower/Fogger,Mist,10-15,8500,Petrol engine
+DUSTER,Powder Duster,Duster,5-10,1200,Manual
+ULTRA_LOW_VOLUME,ULV Sprayer,ULV,5-10,15000,Electric/Petrol
+HAND_SPRAYER,Hand Trigger Sprayer,Hand,1-2,150,Manual

@@ -1,0 +1,11 @@
+code,name,irrigation_type,estimated_cost_lsl,area_coverage_ha
+WATER_PUMP_PETROL,Petrol Water Pump,Pumping,8000,1-5 ha
+WATER_PUMP_DIESEL,Diesel Water Pump,Pumping,15000,2-10 ha
+WATER_PUMP_ELECTRIC,Electric Water Pump,Pumping,6000,1-5 ha
+WATER_PUMP_SOLAR,Solar Water Pump,Pumping,25000,1-8 ha
+DRIP_KIT_SMALL,Small Drip Irrigation Kit,Drip,8000,0.25-0.5 ha
+DRIP_KIT_MEDIUM,Medium Drip Irrigation Kit,Drip,15000,0.5-2 ha
+DRIP_KIT_LARGE,Large Drip Irrigation Kit,Drip,35000,2-5 ha
+SPRINKLER_PORTABLE,Portable Sprinkler System,Sprinkler,5000,0.5-2 ha
+SPRINKLER_PERMANENT,Permanent Sprinkler System,Sprinkler,25000,2-10 ha
+HOSE_REEL,Hose Reel System,Manual,3000,0.25-1 ha

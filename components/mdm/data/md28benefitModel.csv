@@ -1,0 +1,8 @@
+code,name,description
+FIXED_AMOUNT,Fixed Amount Per Farmer,Same amount for all beneficiaries
+PERCENTAGE,Percentage Cost Coverage,Percentage of eligible costs covered
+PACKAGE,Input Package,Pre-defined package of inputs
+TIERED,Tiered Benefits,Different tiers/levels of benefits
+PER_UNIT,Per-Unit Subsidy,Subsidy per hectare/livestock head
+MATCHING,Matching Grant,Government matches farmer contribution
+HYBRID,Hybrid/Custom Formula,Custom calculation formula

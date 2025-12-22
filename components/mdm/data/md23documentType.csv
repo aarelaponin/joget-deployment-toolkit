@@ -1,0 +1,15 @@
+code,name,description,max_size_mb,allowed_formats
+NATIONAL_ID,Copy of National ID,Government-issued ID card,2,PDF;JPG;PNG
+LAND_TITLE,Land Ownership Title,Proof of land ownership,5,PDF;JPG
+RENTAL_AGREEMENT,Land Rental Agreement,Lease or rental contract,5,PDF;JPG
+BANK_STATEMENT,Bank Account Statement,Recent bank statement,3,PDF
+MOBILE_MONEY_STMT,Mobile Money Statement,Mobile money transaction history,2,PDF;JPG
+COOP_CERTIFICATE,Cooperative Registration,Cooperative registration certificate,3,PDF
+HARVEST_RECORDS,Previous Harvest Records,Harvest documentation,3,PDF;JPG;XLSX
+RESIDENCE_PROOF,Proof of Residence,Utility bill or official letter,2,PDF;JPG
+TAX_CLEARANCE,Tax Clearance Certificate,Tax compliance certificate,2,PDF
+TRAINING_CERT,Training Certificates,Agricultural training certificates,2,PDF;JPG
+FARM_PHOTO,Farm Photo,Current farm photograph,5,JPG;PNG
+RECOMMENDATION,Letter of Recommendation,Extension officer letter,2,PDF
+DISABILITY_CERT,Disability Certificate,Official disability documentation,2,PDF
+OTHER,Other Supporting Documents,Additional documents,5,PDF;JPG;PNG

@@ -1,0 +1,11 @@
+code,name,description
+SMALLHOLDER,Smallholder Farmers,Farmers with less than 2 hectares
+COMMERCIAL,Commercial Farmers,Large-scale commercial operations
+WOMEN,Women Farmers,Female-headed households
+YOUTH,Youth Farmers,Farmers aged 18-35 years
+COOPERATIVES,Farmer Cooperatives,Registered farmer groups
+LIVESTOCK,Livestock Farmers,Primary livestock producers
+CROP,Crop Farmers,Primary crop producers
+VULNERABLE,Vulnerable Households,Food insecure or at-risk households
+DISABLED,Farmers with Disability,Persons with disabilities
+ELDERLY,Elderly Farmers,Farmers aged 60 years and above

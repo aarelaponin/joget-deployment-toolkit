@@ -2,7 +2,7 @@
   "className": "org.joget.apps.form.model.Form",
   "properties": {
     "id": "md41AllocBasis",
-    "name": "Allocation Basis",
+    "name": "MD.41 - Allocation Basis",
     "tableName": "md41AllocBasis",
     "description": "Methods for calculating input allocations",
     "loadBinder": {
@@ -39,29 +39,31 @@
           },
           "elements": [
             {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
               "className": "org.joget.apps.form.lib.TextField",
               "properties": {
                 "id": "code",
                 "label": "Code",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "30",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
@@ -69,95 +71,129 @@
               "properties": {
                 "id": "name",
                 "label": "Name",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "100",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.TextArea",
               "properties": {
-                "id": "description",
-                "label": "Description",
-                "required": "",
                 "readonly": "",
-                "value": "",
+                "label": "Description",
                 "rows": "2",
                 "cols": "50",
-                "encryption": ""
+                "readonlyLabel": "",
+                "id": "description",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "placeholder": "",
+                "encryption": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "calculationUnit",
-                "label": "Calculation Unit",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "hectare",
-                        "label": "Per Hectare"
-                      },
-                      {
-                        "value": "farmer",
-                        "label": "Per Farmer"
-                      },
-                      {
-                        "value": "head",
-                        "label": "Per Livestock Head"
-                      },
-                      {
-                        "value": "package",
-                        "label": "Fixed Package"
-                      },
-                      {
-                        "value": "currency",
-                        "label": "Currency Amount"
-                      }
-                    ]
+                "label": "Calculation Unit",
+                "readonlyLabel": "",
+                "id": "calculationUnit",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "hectare",
+                    "label": "Per Hectare",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "farmer",
+                    "label": "Per Farmer",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "head",
+                    "label": "Per Livestock Head",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "package",
+                    "label": "Fixed Package",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "currency",
+                    "label": "Currency Amount",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "requiresFarmerData",
-                "label": "Requires Farmer Data",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Requires Farmer Data",
+                "readonlyLabel": "",
+                "id": "requiresFarmerData",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "N",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -165,13 +201,8 @@
               "properties": {
                 "id": "formula",
                 "label": "Calculation Formula",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
                 "maxlength": "200",
-                "placeholder": "e.g., land_hectares * rate",
-                "encryption": ""
+                "placeholder": "e.g., land_hectares * rate"
               }
             },
             {
@@ -179,46 +210,45 @@
               "properties": {
                 "id": "sortOrder",
                 "label": "Sort Order",
-                "required": "",
-                "readonly": "",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "isActive",
-                "label": "Active",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Active",
+                "readonlyLabel": "",
+                "id": "isActive",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "Y",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

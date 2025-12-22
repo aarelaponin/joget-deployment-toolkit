@@ -41,37 +41,52 @@
             {
               "className": "org.joget.apps.form.lib.HiddenField",
               "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "entitlementId",
-                "value": ""
+                "useDefaultWhenEmpty": "",
+                "id": "entitlementCode",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "inputCode",
-                "label": "Input",
-                "required": "true",
                 "readonly": "true",
                 "multiple": "",
-                "size": "medium",
+                "label": "Input",
+                "readonlyLabel": "",
+                "id": "inputCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "md44Input",
                     "idColumn": "code",
                     "labelColumn": "name",
-                    "addEmptyOption": "false",
+                    "groupingColumn": "",
+                    "extraCondition": "",
+                    "addEmptyOption": "",
                     "emptyLabel": "",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -79,11 +94,7 @@
               "properties": {
                 "id": "inputName",
                 "label": "Input Name",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -91,11 +102,7 @@
               "properties": {
                 "id": "inputCategory",
                 "label": "Category",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "small",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -103,18 +110,7 @@
               "properties": {
                 "id": "qtyEntitled",
                 "label": "Quantity Entitled",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "validator": {
-                  "className": "org.joget.apps.form.lib.RegexValidator",
-                  "properties": {
-                    "regex": "^[0-9]+$",
-                    "message": "Please enter numbers only"
-                  }
-                },
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -122,11 +118,7 @@
               "properties": {
                 "id": "unit",
                 "label": "Unit",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "small",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -134,11 +126,7 @@
               "properties": {
                 "id": "unitValue",
                 "label": "Unit Value",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -146,18 +134,7 @@
               "properties": {
                 "id": "subsidyAmount",
                 "label": "Subsidy Amount",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "validator": {
-                  "className": "org.joget.apps.form.lib.RegexValidator",
-                  "properties": {
-                    "regex": "^[0-9]+$",
-                    "message": "Please enter numbers only"
-                  }
-                },
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -165,11 +142,7 @@
               "properties": {
                 "id": "farmerContrib",
                 "label": "Farmer Pays",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "medium",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -177,56 +150,58 @@
               "properties": {
                 "id": "qtyRedeemed",
                 "label": "Qty Redeemed",
-                "required": "",
                 "readonly": "true",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "itemStatus",
-                "label": "Status",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "PENDING",
-                        "label": "Pending"
-                      },
-                      {
-                        "value": "PARTIAL",
-                        "label": "Partially Redeemed"
-                      },
-                      {
-                        "value": "COMPLETE",
-                        "label": "Complete"
-                      },
-                      {
-                        "value": "SUBSTITUTED",
-                        "label": "Substituted"
-                      }
-                    ]
+                "label": "Status",
+                "readonlyLabel": "",
+                "id": "itemStatus",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "PENDING",
+                    "label": "Pending",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "PARTIAL",
+                    "label": "Partially Redeemed",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "COMPLETE",
+                    "label": "Complete",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "SUBSTITUTED",
+                    "label": "Substituted",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "PENDING",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

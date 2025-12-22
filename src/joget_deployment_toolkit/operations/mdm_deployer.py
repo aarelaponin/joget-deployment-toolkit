@@ -457,3 +457,300 @@ class MDMDataDeployer:
             self.logger.debug(f"  [{current}/{total}] ✓ {result.record_id}")
         else:
             self.logger.debug(f"  [{current}/{total}] ✗ {result.message}")
+
+
+class PluginMDMDeployer:
+    """
+    MDM deployer using the FormCreator API plugin.
+
+    This is the RECOMMENDED deployer for MDM forms. It uses the formcreator
+    plugin which handles form, table, datalist, and menu creation in a single
+    API call.
+
+    Workflow:
+    1. Deploy form via formcreator plugin (creates form + table + datalist + menu)
+    2. Load CSV data with c_ column prefix
+    3. Submit data via auto-generated API endpoint
+
+    Example:
+        >>> from joget_deployment_toolkit import JogetClient
+        >>> from joget_deployment_toolkit.operations import PluginMDMDeployer
+        >>> from pathlib import Path
+        >>>
+        >>> client = JogetClient.from_instance("jdx4")
+        >>> deployer = PluginMDMDeployer(client)
+        >>>
+        >>> result = deployer.deploy_mdm(
+        ...     form_file=Path("md01maritalStatus.json"),
+        ...     data_file=Path("md01maritalStatus.csv"),
+        ...     app_id="farmersPortal",
+        ...     with_crud=True
+        ... )
+        >>> print(result)
+    """
+
+    def __init__(self, client):
+        """
+        Initialize deployer with Joget client.
+
+        Args:
+            client: JogetClient instance (from_instance() recommended)
+        """
+        self.client = client
+        self.logger = logging.getLogger(__name__)
+
+    def deploy_mdm(
+        self,
+        form_file: Path,
+        data_file: Path | None = None,
+        *,
+        app_id: str,
+        app_version: str = "1",
+        with_crud: bool = True,
+        with_api: bool = True,
+    ) -> MDMDeploymentResult:
+        """
+        Deploy MDM form with optional data using formcreator plugin.
+
+        Single method that:
+        1. Creates form definition via plugin
+        2. Creates database table (automatic)
+        3. Creates datalist + menu (if with_crud=True)
+        4. Creates API endpoint (if with_api=True)
+        5. Imports CSV data (if data_file provided)
+
+        Args:
+            form_file: Path to form JSON definition
+            data_file: Optional path to CSV data file
+            app_id: Target application ID
+            app_version: Application version (default: "1")
+            with_crud: Create datalist + userview menu (default: True)
+            with_api: Create API endpoint (default: True)
+
+        Returns:
+            MDMDeploymentResult with deployment status
+
+        Example:
+            >>> result = deployer.deploy_mdm(
+            ...     form_file=Path("components/mdm/md01maritalStatus.json"),
+            ...     data_file=Path("components/mdm/data/md01maritalStatus.csv"),
+            ...     app_id="farmersPortal",
+            ...     with_crud=True
+            ... )
+            >>> if result.success:
+            ...     print(f"Deployed {result.form_id} with {result.records_submitted} records")
+        """
+        # Load form definition
+        try:
+            with open(form_file, encoding="utf-8") as f:
+                form_def = json.load(f)
+            form_id = form_def.get("properties", {}).get("id")
+            form_name = form_def.get("properties", {}).get("name", form_id)
+        except Exception as e:
+            return MDMDeploymentResult(
+                form_id=form_file.stem,
+                form_created=False,
+                form_message=f"Failed to load form definition: {e}",
+                errors=[str(e)],
+            )
+
+        result = MDMDeploymentResult(
+            form_id=form_id,
+            form_created=False,
+            form_message="",
+        )
+
+        # Step 1: Deploy form via plugin
+        self.logger.info(f"Deploying {form_id} via formcreator plugin...")
+
+        try:
+            deploy_result = self.client.deploy_form(
+                app_id=app_id,
+                form_definition=form_def,
+                app_version=app_version,
+                create_api=with_api,
+                create_crud=with_crud,
+            )
+
+            result.form_created = deploy_result.success
+            result.form_message = deploy_result.message or "Form deployed successfully"
+
+            if deploy_result.raw_data:
+                result.api_id = deploy_result.raw_data.get("apiId")
+
+            if not deploy_result.success:
+                result.errors.append(f"Form deployment failed: {deploy_result.message}")
+                return result
+
+            self.logger.info(f"  ✓ Form deployed: {form_id}")
+            if with_crud:
+                self.logger.info(f"    - Datalist: {deploy_result.raw_data.get('datalistId', 'N/A')}")
+            if with_api:
+                self.logger.info(f"    - API: {deploy_result.raw_data.get('apiId', 'N/A')}")
+
+        except Exception as e:
+            result.errors.append(f"Form deployment error: {e}")
+            self.logger.error(f"  ✗ Failed to deploy {form_id}: {e}")
+            return result
+
+        # Step 2: Import data if CSV provided
+        if data_file and data_file.exists():
+            self.logger.info(f"Importing data from {data_file.name}...")
+
+            try:
+                from ..loaders.csv_loader import CSVDataLoader
+
+                records = CSVDataLoader.load_csv(data_file, strip_infrastructure=True)
+
+                if not records:
+                    self.logger.warning(f"  No data to import for {form_id}")
+                    return result
+
+                # Submit via API if available
+                if result.api_id and hasattr(self.client, "submit_form_data_batch"):
+                    submission_results = self.client.submit_form_data_batch(
+                        form_id=form_id,
+                        records=records,
+                        api_id=result.api_id,
+                    )
+                    result.records_submitted = sum(1 for r in submission_results if r.success)
+                    result.records_failed = sum(1 for r in submission_results if not r.success)
+                else:
+                    # Fallback: direct database insertion
+                    self.logger.info("  API not available, using direct database insertion...")
+                    result = self._import_data_direct(result, form_id, records)
+
+                self.logger.info(
+                    f"  ✓ Imported {result.records_submitted}/{result.total_records} records"
+                )
+
+            except Exception as e:
+                result.errors.append(f"Data import error: {e}")
+                self.logger.error(f"  ✗ Failed to import data: {e}")
+
+        return result
+
+    def _import_data_direct(
+        self,
+        result: MDMDeploymentResult,
+        form_id: str,
+        records: list[dict],
+    ) -> MDMDeploymentResult:
+        """Import data directly to database with c_ prefix."""
+        from ..loaders.csv_loader import CSVDataLoader
+        from datetime import datetime
+
+        # Add c_ prefix for database columns
+        prefixed_records = CSVDataLoader.add_column_prefix(records)
+
+        # Get database connection
+        if not hasattr(self.client, "get_db_connection"):
+            result.errors.append("Database connection not available")
+            return result
+
+        try:
+            conn = self.client.get_db_connection()
+            cursor = conn.cursor()
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            table_name = f"app_fd_{form_id}"
+
+            for i, record in enumerate(prefixed_records):
+                # Build INSERT statement
+                columns = ["id", "dateCreated", "dateModified"] + list(record.keys())
+                placeholders = ["%s"] * len(columns)
+                values = [str(i + 1), now, now] + list(record.values())
+
+                sql = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(placeholders)})"
+
+                try:
+                    cursor.execute(sql, values)
+                    result.records_submitted += 1
+                except Exception as e:
+                    result.records_failed += 1
+                    if len(result.errors) < 5:
+                        result.errors.append(f"Record {i + 1}: {e}")
+
+            conn.commit()
+            cursor.close()
+
+        except Exception as e:
+            result.errors.append(f"Database error: {e}")
+
+        return result
+
+    def deploy_all_from_directory(
+        self,
+        forms_dir: Path,
+        data_dir: Path,
+        *,
+        app_id: str,
+        app_version: str = "1",
+        pattern: str = "md*.json",
+        with_crud: bool = True,
+        with_api: bool = True,
+    ) -> list[MDMDeploymentResult]:
+        """
+        Deploy all MDM forms from a directory.
+
+        Args:
+            forms_dir: Directory containing form JSON files
+            data_dir: Directory containing CSV data files
+            app_id: Target application ID
+            app_version: Application version
+            pattern: Glob pattern for form files (default: "md*.json")
+            with_crud: Create datalist + menu for each form
+            with_api: Create API endpoint for each form
+
+        Returns:
+            List of MDMDeploymentResult for each form
+
+        Example:
+            >>> results = deployer.deploy_all_from_directory(
+            ...     forms_dir=Path("components/mdm"),
+            ...     data_dir=Path("components/mdm/data"),
+            ...     app_id="farmersPortal"
+            ... )
+            >>> successful = sum(1 for r in results if r.success)
+            >>> print(f"Deployed {successful}/{len(results)} forms")
+        """
+        results = []
+        form_files = sorted(forms_dir.glob(pattern))
+
+        if not form_files:
+            self.logger.warning(f"No form files found in {forms_dir} matching {pattern}")
+            return results
+
+        self.logger.info(f"Deploying {len(form_files)} MDM forms via formcreator plugin...")
+
+        for form_file in form_files:
+            # Find matching data file
+            form_id = form_file.stem
+            data_file = data_dir / f"{form_id}.csv"
+
+            if not data_file.exists():
+                # Try without the form suffix variations
+                data_file = None
+
+            result = self.deploy_mdm(
+                form_file=form_file,
+                data_file=data_file,
+                app_id=app_id,
+                app_version=app_version,
+                with_crud=with_crud,
+                with_api=with_api,
+            )
+
+            results.append(result)
+            self.logger.info(str(result))
+
+        # Summary
+        successful = sum(1 for r in results if r.success)
+        partial = sum(1 for r in results if r.partial_success and not r.success)
+        failed = sum(1 for r in results if not r.form_created)
+
+        self.logger.info(
+            f"Deployment complete: {successful} successful, "
+            f"{partial} partial, {failed} failed"
+        )
+
+        return results

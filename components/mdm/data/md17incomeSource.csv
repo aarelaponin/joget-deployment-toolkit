@@ -1,0 +1,11 @@
+id,code,name
+1,formal_employment,Formal Employment
+2,informal_employment,Informal Employment
+3,farming,Farming (crops/livestock/fish/bees)
+4,non_farm_business,Non-farm Business
+5,income_rentals,Income from Rentals
+6,family_support,Support from family or non-family
+7,transfers_assistance,Transfer and social assistance program
+8,remittances,Remittances from abroad
+9,pension,Pension
+10,other,Other

@@ -5,11 +5,15 @@ Provides orchestration logic for complex multi-step operations.
 """
 
 from .component_deployer import ComponentDeployer, ComponentDeploymentResult
-from .mdm_deployer import MDMDataDeployer, MDMDeploymentResult
+from .instance_migrator import InstanceMigrator, MigrationAnalysis
+from .mdm_deployer import MDMDataDeployer, MDMDeploymentResult, PluginMDMDeployer
 
 __all__ = [
     "MDMDataDeployer",
     "MDMDeploymentResult",
+    "PluginMDMDeployer",
     "ComponentDeployer",
     "ComponentDeploymentResult",
+    "InstanceMigrator",
+    "MigrationAnalysis",
 ]

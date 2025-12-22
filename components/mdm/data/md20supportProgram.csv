@@ -1,0 +1,10 @@
+id,code,name,acronym
+1,public_assistance,Public Assistance Scheme,PAS
+2,child_grant,Child Grant Programme,CGP
+3,input_subsidy,Input Subsidy Programme,ISP
+4,wamp,WAMP,WAMP
+5,block_farming,Block Farming,BF
+6,old_age_pension,Old Age Pension,OAP
+7,disability_grant,Disability Grant,DG
+8,school_feeding,School Feeding Programme,SFP
+9,none,None,

@@ -1,0 +1,7 @@
+code,name,description,requires_account_number
+BANK_TRANSFER,Direct Bank Transfer,Direct transfer to bank account,Yes
+MOBILE_MONEY,Mobile Money,Mobile wallet transfer,Yes
+CASH_AGENT,Cash via Agent,Cash collection at agent location,No
+E_VOUCHER,E-Voucher,Electronic voucher code,No
+IN_KIND,In-Kind Distribution,Physical inputs delivery,No
+CHECK,Bank Check,Paper check issuance,No

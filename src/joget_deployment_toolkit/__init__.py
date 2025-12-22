@@ -11,7 +11,7 @@ This package provides:
 - MDM Deployment: Orchestration for Master Data Management deployment
 - Inventory: Instance status checks and cross-instance app comparison
 
-Version 1.0.0 - Initial release as focused deployment toolkit
+Version 1.1.0 - FormCreator plugin integration, instance migration, inventory API
 """
 
 __version__ = "1.1.0"
@@ -49,6 +49,7 @@ from joget_deployment_toolkit.models import (
     ApplicationInfo,
     BatchResult,
     DatabaseConfig,
+    DatalistInfo,
     DataSubmissionResult,
     DeploymentConfig,
     ExportResult,
@@ -57,8 +58,10 @@ from joget_deployment_toolkit.models import (
     ImportResult,
     # Configuration models
     JogetConfig,
+    MigrationResult,
     # Response models
     SystemInfo,
+    UserviewInfo,
     # Inventory models
     AppComparison,
     AppSummary,
@@ -78,6 +81,10 @@ from joget_deployment_toolkit.inventory import (
 from joget_deployment_toolkit.operations import (
     ComponentDeployer,
     ComponentDeploymentResult,
+    InstanceMigrator,
+    MigrationAnalysis,
+    PluginMDMDeployer,
+    MDMDeploymentResult,
 )
 
 __all__ = [
@@ -115,6 +122,9 @@ __all__ = [
     "ExportResult",
     "ImportResult",
     "DataSubmissionResult",
+    "DatalistInfo",
+    "UserviewInfo",
+    "MigrationResult",
     # Discovery
     "FormDiscovery",
     # Inventory functions
@@ -130,4 +140,8 @@ __all__ = [
     # Operations
     "ComponentDeployer",
     "ComponentDeploymentResult",
+    "InstanceMigrator",
+    "MigrationAnalysis",
+    "PluginMDMDeployer",
+    "MDMDeploymentResult",
 ]

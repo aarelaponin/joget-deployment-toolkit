@@ -1,0 +1,13 @@
+id,code,name
+1,no_till,No Till
+2,planting_basins,Planting Basins
+3,ripping,Ripping
+4,crop_rotation,Crop Rotation
+5,improved_fallow,Improved Fallow
+6,fertilizer_tree,Use of Fertilizer Tree/Crop
+7,crop_residue,Maintenance of Crop Residue
+8,mulching,Mulching
+9,contours,Contours
+10,terraces,Terraces
+11,agro_forestry,Agro-forestry Nurseries
+12,water_harvesting,Water Harvesting

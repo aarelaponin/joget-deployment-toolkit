@@ -1,0 +1,4 @@
+id,code,name,hectare_conversion
+1,acre,Acre,0.4047
+2,hectare,Hectare,1.0
+3,sq_metres,Square Metres,0.0001

@@ -1,0 +1,13 @@
+code,name,description,sequence,is_active,is_final,color,icon
+DRAFT,Draft,Application started but not submitted,1,Yes,No,gray,edit
+SUBMITTED,Submitted,Application submitted awaiting review,2,Yes,No,blue,send
+UNDER_REVIEW,Under Review,Being reviewed by staff,3,Yes,No,blue,eye
+ELIGIBILITY_CHECK,Eligibility Verification,Checking eligibility criteria,4,Yes,No,blue,check-circle
+DOCUMENT_REVIEW,Document Review,Reviewing uploaded documents,5,Yes,No,orange,file-text
+FIELD_VERIFICATION,Field Verification,Extension officer field visit,6,Yes,No,orange,map-pin
+PENDING_INFO,Pending Information,Awaiting farmer response,7,Yes,No,yellow,alert-circle
+APPROVED,Approved,Application approved,8,No,Yes,green,check
+REJECTED,Rejected,Application rejected,9,No,Yes,red,x
+WITHDRAWN,Withdrawn,Withdrawn by farmer,10,No,Yes,gray,minus-circle
+BENEFIT_ISSUED,Benefit Issued,Subsidy/benefit provided,11,No,Yes,green,gift
+COMPLETED,Completed,Process completed,12,No,Yes,green,check-circle

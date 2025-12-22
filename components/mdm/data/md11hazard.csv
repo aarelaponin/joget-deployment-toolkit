@@ -1,0 +1,11 @@
+id,code,name
+1,dry_spell,Dry Spell (>10 days without rain)
+2,flooding,Flooding
+3,crop_pests,Significant Crop Pests Outbreak
+4,crop_disease,Significant Crop Disease Outbreak
+5,crop_damage_animals,Crop damage by animals/Birds
+6,wild_fire,Wild fire
+7,lack_inputs,Lack of inputs
+8,hail,Hail Damage
+9,frost,Frost
+10,strong_winds,Strong Winds

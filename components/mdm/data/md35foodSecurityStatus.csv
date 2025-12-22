@@ -1,0 +1,5 @@
+code,name,severity_level,priority_weight
+SECURE,Food Secure,1,0
+MODERATE,Moderately Food Insecure,2,5
+SEVERE,Severely Food Insecure,3,10
+CRISIS,Food Security Crisis,4,20

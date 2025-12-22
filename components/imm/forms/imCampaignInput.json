@@ -41,37 +41,52 @@
             {
               "className": "org.joget.apps.form.lib.HiddenField",
               "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "campaignId",
-                "value": ""
+                "useDefaultWhenEmpty": "",
+                "id": "campaignCode",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "inputCode",
-                "label": "Input",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Input",
+                "readonlyLabel": "",
+                "id": "inputCode",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "md44Input",
                     "idColumn": "code",
                     "labelColumn": "name",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Select Input --",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -79,11 +94,7 @@
               "properties": {
                 "id": "inputCategory",
                 "label": "Category",
-                "required": "",
-                "readonly": "true",
-                "value": "",
-                "size": "small",
-                "encryption": ""
+                "readonly": "true"
               }
             },
             {
@@ -91,97 +102,125 @@
               "properties": {
                 "id": "totalQtyAvailable",
                 "label": "Total Quantity Available",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
-                "placeholder": "0",
+                "maxlength": "",
                 "validator": {
-                  "className": "org.joget.apps.form.lib.MultiValidator",
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "validators": [
-                      {
-                        "className": "org.joget.apps.form.lib.DefaultValidator",
-                        "properties": {
-                          "mandatory": "true"
-                        }
-                      },
-                      {
-                        "className": "org.joget.apps.form.lib.RegexValidator",
-                        "properties": {
-                          "regex": "^[0-9]+(\\.[0-9]{1,2})?$",
-                          "message": "Enter a valid quantity"
-                        }
-                      }
-                    ]
+                    "mandatory": "true",
+                    "type": "regex",
+                    "message": "Enter a valid quantity",
+                    "regex": "^[0-9]+(\\.[0-9]{1,2})?$"
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "0",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "unit",
+                "readonly": "",
+                "multiple": "",
                 "label": "Unit",
-                "required": "true",
-                "readonly": "",
-                "multiple": "",
-                "size": "medium",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "kg",
-                        "label": "Kilograms (kg)"
-                      },
-                      {
-                        "value": "litre",
-                        "label": "Litres (L)"
-                      },
-                      {
-                        "value": "packet",
-                        "label": "Packets"
-                      },
-                      {
-                        "value": "piece",
-                        "label": "Pieces"
-                      },
-                      {
-                        "value": "dose",
-                        "label": "Doses"
-                      },
-                      {
-                        "value": "bag",
-                        "label": "Bags (50kg)"
-                      }
-                    ]
+                "readonlyLabel": "",
+                "id": "unit",
+                "iconIncluded": false,
+                "options": [
+                  {
+                    "value": "kg",
+                    "label": "Kilograms (kg)",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "litre",
+                    "label": "Litres (L)",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "packet",
+                    "label": "Packets",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "piece",
+                    "label": "Pieces",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "dose",
+                    "label": "Doses",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "bag",
+                    "label": "Bags (50kg)",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "allocationBasis",
-                "label": "Allocation Basis",
-                "required": "true",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Allocation Basis",
+                "readonlyLabel": "",
+                "id": "allocationBasis",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "md41AllocBasis",
                     "idColumn": "code",
                     "labelColumn": "name",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Select --",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -189,12 +228,7 @@
               "properties": {
                 "id": "allocationRate",
                 "label": "Allocation Rate",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "e.g., 10 (kg per hectare)",
-                "encryption": ""
+                "placeholder": "e.g., 10 (kg per hectare)"
               }
             },
             {
@@ -202,12 +236,7 @@
               "properties": {
                 "id": "minPerFarmer",
                 "label": "Min per Farmer",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0",
-                "encryption": ""
+                "placeholder": "0"
               }
             },
             {
@@ -215,12 +244,7 @@
               "properties": {
                 "id": "maxPerFarmer",
                 "label": "Max per Farmer",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0",
-                "encryption": ""
+                "placeholder": "0"
               }
             },
             {
@@ -228,12 +252,7 @@
               "properties": {
                 "id": "subsidyRatePct",
                 "label": "Subsidy Rate (%)",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "e.g., 80",
-                "encryption": ""
+                "placeholder": "e.g., 80"
               }
             },
             {
@@ -241,12 +260,7 @@
               "properties": {
                 "id": "farmerContribution",
                 "label": "Farmer Co-Payment",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0.00",
-                "encryption": ""
+                "placeholder": "0.00"
               }
             },
             {
@@ -254,19 +268,7 @@
               "properties": {
                 "id": "ceilingPrice",
                 "label": "Ceiling Price (per unit)",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0.00",
-                "validator": {
-                  "className": "org.joget.apps.form.lib.RegexValidator",
-                  "properties": {
-                    "regex": "^[0-9]+$",
-                    "message": "Please enter numbers only"
-                  }
-                },
-                "encryption": ""
+                "placeholder": "0.00"
               }
             },
             {
@@ -274,11 +276,8 @@
               "properties": {
                 "id": "qtyAllocated",
                 "label": "Qty Allocated",
-                "required": "",
                 "readonly": "true",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             },
             {
@@ -286,21 +285,13 @@
               "properties": {
                 "id": "qtyDistributed",
                 "label": "Qty Distributed",
-                "required": "",
                 "readonly": "true",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

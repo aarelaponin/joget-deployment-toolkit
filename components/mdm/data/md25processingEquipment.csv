@@ -1,0 +1,10 @@
+code,name,processing_type,capacity,estimated_cost_lsl,power_source
+MAIZE_SHELLER_MANUAL,Manual Maize Sheller,Shelling,50-100 kg/hr,2500,Manual
+MAIZE_SHELLER_MOTORIZED,Motorized Maize Sheller,Shelling,200-500 kg/hr,15000,Petrol/Electric
+THRESHER_SMALL,Small Crop Thresher,Threshing,100-200 kg/hr,25000,Petrol/Diesel
+THRESHER_MEDIUM,Medium Crop Thresher,Threshing,500-1000 kg/hr,45000,Diesel
+WINNOWER,Grain Winnower,Winnowing,200-500 kg/hr,8000,Electric/Manual
+GRAIN_CLEANER,Grain Cleaner/Grader,Cleaning,300-500 kg/hr,12000,Electric
+MILL_HAMMER,Hammer Mill,Grinding,100-300 kg/hr,35000,Diesel/Electric
+CHAFF_CUTTER,Chaff Cutter,Cutting,200-400 kg/hr,8500,Manual/Electric
+BALER,Hay/Straw Baler,Baling,50-100 bales/hr,65000,Tractor PTO

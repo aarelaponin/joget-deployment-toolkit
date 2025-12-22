@@ -1,0 +1,9 @@
+code,name,has_subcategory,subcategory_source,default_unit,typical_subsidy_percent
+SEEDS,Seeds,Yes,md19crops,kg,70
+FERTILIZER,Fertilizer,Yes,md27fertilizer,50kg_bags,60
+PESTICIDES,Pesticides,Yes,md27pesticide,litres,70
+LIVESTOCK_VET,Livestock & Veterinary,Yes,md27livestockSupply,units,80
+IRRIGATION,Irrigation Materials,Yes,md27irrigation,metres,75
+FENCING,Fencing Materials,No,,metres,50
+STORAGE,Storage Materials,No,,units,60
+OTHER,Other Inputs,No,,units,50

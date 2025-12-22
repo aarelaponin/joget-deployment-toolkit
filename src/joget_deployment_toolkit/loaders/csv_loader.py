@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Set
 logger = logging.getLogger(__name__)
 
 
-# Infrastructure fields that Joget auto-generates
+# Infrastructure fields that Joget auto-generates (no c_ prefix in database)
 INFRASTRUCTURE_FIELDS: Set[str] = {
     "id",
     "dateCreated",
@@ -23,6 +23,9 @@ INFRASTRUCTURE_FIELDS: Set[str] = {
     "createdByName",
     "modifiedByName",
 }
+
+# Fields that should NOT receive c_ prefix (infrastructure + special fields)
+NO_PREFIX_FIELDS: Set[str] = INFRASTRUCTURE_FIELDS | {"c_"}  # Already prefixed
 
 
 class CSVDataLoader:
@@ -249,3 +252,89 @@ class CSVDataLoader:
                     f"that Joget auto-generates: {', '.join(sorted(invalid_fields))}. "
                     f"These fields must be removed before submission."
                 )
+
+    @staticmethod
+    def add_column_prefix(
+        records: List[Dict[str, Any]],
+        *,
+        prefix: str = "c_",
+    ) -> List[Dict[str, Any]]:
+        """
+        Add Joget column prefix to field names.
+
+        Joget stores custom form fields with a 'c_' prefix in the database.
+        This method transforms field names for direct database insertion.
+
+        Infrastructure fields (id, dateCreated, etc.) are NOT prefixed.
+        Fields already starting with 'c_' are NOT double-prefixed.
+
+        Args:
+            records: List of record dictionaries
+            prefix: Column prefix (default: "c_")
+
+        Returns:
+            New list with prefixed field names
+
+        Example:
+            >>> records = [{'code': 'single', 'name': 'Single'}]
+            >>> prefixed = CSVDataLoader.add_column_prefix(records)
+            >>> print(prefixed[0])
+            {'c_code': 'single', 'c_name': 'Single'}
+        """
+        infrastructure_lower = {f.lower() for f in INFRASTRUCTURE_FIELDS}
+        prefixed_records = []
+
+        for record in records:
+            prefixed_record = {}
+            for key, value in record.items():
+                key_lower = key.lower()
+                # Don't prefix infrastructure fields or already-prefixed fields
+                if key_lower in infrastructure_lower or key_lower.startswith("c_"):
+                    prefixed_record[key] = value
+                else:
+                    prefixed_record[f"{prefix}{key}"] = value
+            prefixed_records.append(prefixed_record)
+
+        return prefixed_records
+
+    @staticmethod
+    def load_csv_for_database(
+        csv_file: Path,
+        *,
+        encoding: str = "utf-8",
+    ) -> List[Dict[str, Any]]:
+        """
+        Load CSV file prepared for direct database insertion.
+
+        Convenience method that:
+        1. Loads CSV data
+        2. Strips infrastructure fields (id, dateCreated, etc.)
+        3. Adds 'c_' prefix to custom field names
+
+        This is the recommended method when inserting data directly
+        into Joget database tables (app_fd_*).
+
+        Args:
+            csv_file: Path to CSV file
+            encoding: File encoding (default: utf-8)
+
+        Returns:
+            List of records ready for database insertion
+
+        Example:
+            >>> records = CSVDataLoader.load_csv_for_database(
+            ...     Path("md01maritalStatus.csv")
+            ... )
+            >>> # Records now have c_code, c_name, etc.
+            >>> print(records[0])
+            {'c_code': 'single', 'c_name': 'Single'}
+        """
+        # Load and strip infrastructure fields
+        records = CSVDataLoader.load_csv(
+            csv_file,
+            strip_infrastructure=True,
+            encoding=encoding,
+        )
+
+        # Add c_ prefix for database columns
+        return CSVDataLoader.add_column_prefix(records)

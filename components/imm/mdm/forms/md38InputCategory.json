@@ -2,7 +2,7 @@
   "className": "org.joget.apps.form.model.Form",
   "properties": {
     "id": "md38InputCategory",
-    "name": "Input Category",
+    "name": "MD.38 - Input Category",
     "tableName": "md38InputCategory",
     "description": "Categories for agricultural inputs (Seeds, Fertilizers, etc.)",
     "loadBinder": {
@@ -39,30 +39,31 @@
           },
           "elements": [
             {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
               "className": "org.joget.apps.form.lib.TextField",
               "properties": {
                 "id": "code",
                 "label": "Category Code",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "30",
-                "placeholder": "e.g., SEED",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "e.g., SEED",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
@@ -70,132 +71,178 @@
               "properties": {
                 "id": "name",
                 "label": "Category Name",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "100",
-                "placeholder": "e.g., Seeds",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "e.g., Seeds",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.TextArea",
               "properties": {
-                "id": "description",
-                "label": "Description",
-                "required": "",
                 "readonly": "",
-                "value": "",
+                "label": "Description",
                 "rows": "2",
                 "cols": "50",
-                "encryption": ""
+                "readonlyLabel": "",
+                "id": "description",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "placeholder": "",
+                "encryption": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "requiresBatchTrack",
+                "fullWidth": "",
+                "readonly": "",
                 "label": "Requires Batch Tracking",
-                "required": "",
-                "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "readonlyLabel": "",
+                "id": "requiresBatchTrack",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "Y",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "hasExpiryDate",
+                "fullWidth": "",
+                "readonly": "",
                 "label": "Has Expiry Date",
-                "required": "",
-                "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "readonlyLabel": "",
+                "id": "hasExpiryDate",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "Y",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "requiresLicense",
+                "fullWidth": "",
+                "readonly": "",
                 "label": "Requires Dealer License",
-                "required": "",
-                "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "readonlyLabel": "",
+                "id": "requiresLicense",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "N",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "coldChainRequired",
-                "label": "Cold Chain Required",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Cold Chain Required",
+                "readonlyLabel": "",
+                "id": "coldChainRequired",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "N",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -203,46 +250,49 @@
               "properties": {
                 "id": "sortOrder",
                 "label": "Sort Order",
-                "required": "",
-                "readonly": "",
-                "value": "0",
-                "size": "medium",
-                "encryption": ""
+                "value": "0"
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "isActive",
-                "label": "Active",
-                "required": "true",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Active",
+                "readonlyLabel": "",
+                "id": "isActive",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "Y",
+                "validator": {
+                  "className": "org.joget.apps.form.lib.DefaultValidator",
+                  "properties": {
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
+                  }
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

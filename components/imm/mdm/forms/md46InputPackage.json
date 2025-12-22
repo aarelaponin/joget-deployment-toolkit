@@ -2,7 +2,7 @@
   "className": "org.joget.apps.form.model.Form",
   "properties": {
     "id": "md46InputPackage",
-    "name": "Input Package",
+    "name": "MD.46 - Input Package",
     "tableName": "md46InputPackage",
     "description": "Pre-defined bundles of inputs",
     "loadBinder": {
@@ -39,29 +39,31 @@
           },
           "elements": [
             {
-              "className": "org.joget.apps.form.lib.HiddenField",
-              "properties": {
-                "id": "id",
-                "value": ""
-              }
-            },
-            {
               "className": "org.joget.apps.form.lib.TextField",
               "properties": {
                 "id": "code",
                 "label": "Package Code",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "30",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
@@ -69,53 +71,80 @@
               "properties": {
                 "id": "name",
                 "label": "Package Name",
-                "required": "true",
+                "encryption": "",
                 "readonly": "",
+                "style": "",
+                "readonlyLabel": "",
+                "storeNumeric": "",
+                "iconIncluded": false,
                 "value": "",
-                "size": "medium",
                 "maxlength": "100",
                 "validator": {
                   "className": "org.joget.apps.form.lib.DefaultValidator",
                   "properties": {
-                    "mandatory": "true"
+                    "mandatory": "true",
+                    "type": "",
+                    "message": ""
                   }
                 },
-                "encryption": ""
+                "requiredSanitize": "",
+                "placeholder": "",
+                "size": "",
+                "workflowVariable": "",
+                "disableIncrementDecrementArrow": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.TextArea",
               "properties": {
-                "id": "description",
-                "label": "Description",
-                "required": "",
                 "readonly": "",
-                "value": "",
+                "label": "Description",
                 "rows": "2",
                 "cols": "50",
-                "encryption": ""
+                "readonlyLabel": "",
+                "id": "description",
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "placeholder": "",
+                "encryption": "",
+                "workflowVariable": ""
               }
             },
             {
               "className": "org.joget.apps.form.lib.SelectBox",
               "properties": {
-                "id": "targetCategory",
-                "label": "Target Farmer Category",
-                "required": "",
                 "readonly": "",
                 "multiple": "",
-                "size": "medium",
+                "label": "Target Farmer Category",
+                "readonlyLabel": "",
+                "id": "targetCategory",
+                "iconIncluded": false,
+                "options": [],
                 "optionsBinder": {
                   "className": "org.joget.apps.form.lib.FormOptionsBinder",
                   "properties": {
                     "formDefId": "md42TargetCategory",
                     "idColumn": "code",
                     "labelColumn": "name",
+                    "groupingColumn": "",
+                    "extraCondition": "",
                     "addEmptyOption": "true",
                     "emptyLabel": "-- Any category --",
-                    "useAjax": "false"
+                    "useAjax": "",
+                    "cacheInterval": ""
                   }
-                }
+                },
+                "value": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "size": "",
+                "workflowVariable": ""
               }
             },
             {
@@ -123,12 +152,7 @@
               "properties": {
                 "id": "packageValue",
                 "label": "Package Value",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0.00",
-                "encryption": ""
+                "placeholder": "0.00"
               }
             },
             {
@@ -136,13 +160,8 @@
               "properties": {
                 "id": "applicableZones",
                 "label": "Applicable Zones",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
                 "maxlength": "200",
-                "placeholder": "e.g., lowlands;foothills",
-                "encryption": ""
+                "placeholder": "e.g., lowlands;foothills"
               }
             },
             {
@@ -150,12 +169,7 @@
               "properties": {
                 "id": "minLandHectares",
                 "label": "Min Land (ha)",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0",
-                "encryption": ""
+                "placeholder": "0"
               }
             },
             {
@@ -163,62 +177,122 @@
               "properties": {
                 "id": "maxLandHectares",
                 "label": "Max Land (ha)",
-                "required": "",
-                "readonly": "",
-                "value": "",
-                "size": "medium",
-                "placeholder": "0",
-                "encryption": ""
+                "placeholder": "0"
               }
             },
             {
               "className": "org.joget.plugin.enterprise.FormGrid",
               "properties": {
-                "id": "packageContents",
+                "showRowNumber": "",
+                "disabledDelete": "",
+                "errorMessage": "Package must have at least one item",
+                "deleteSubformData": "",
+                "pageSize": "20",
                 "label": "Package Contents",
-                "formDefId": "md47PackageContent",
-                "columns": [],
+                "enableSorting": "",
+                "deleteFiles": "",
                 "readonly": "",
+                "deleteGridData": "",
+                "disabledAdd": "",
+                "width": "",
+                "abortRelatedRunningProcesses": "",
+                "readonlyLabel": "",
+                "height": "",
+                "id": "packageContents",
+                "formDefId": "md47PackageContent",
+                "options": [
+                  {
+                    "value": "inputCode",
+                    "label": "Input",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "quantity",
+                    "label": "Qty",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "unit",
+                    "label": "Unit",
+                    "formatType": "text",
+                    "format": "",
+                    "width": ""
+                  },
+                  {
+                    "value": "isOptional",
+                    "label": "Optional",
+                    "formatType": "options",
+                    "format": "",
+                    "width": ""
+                  }
+                ],
+                "submit-label-normal": "",
+                "submit-label-readonly": "",
+                "deleteMessage": "",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "uniqueKey": "",
                 "validateMinRow": "1",
                 "validateMaxRow": "",
-                "allowAddRow": "true",
-                "allowDeleteRow": "true",
-                "errorMessage": "Package must have at least one item"
+                "loadBinder": {
+                  "className": "org.joget.plugin.enterprise.MultirowFormBinder",
+                  "properties": {
+                    "formDefId": "md47PackageContent",
+                    "foreignKey": "packageCode"
+                  }
+                },
+                "storeBinder": {
+                  "className": "org.joget.plugin.enterprise.MultirowFormBinder",
+                  "properties": {
+                    "formDefId": "md47PackageContent",
+                    "foreignKey": "packageCode"
+                  }
+                },
+                "requestParams": []
               }
             },
             {
               "className": "org.joget.apps.form.lib.Radio",
               "properties": {
-                "id": "isActive",
-                "label": "Active",
-                "required": "",
+                "fullWidth": "",
                 "readonly": "",
-                "optionsBinder": {
-                  "className": "org.joget.apps.form.lib.FormOptionsBinder",
-                  "properties": {
-                    "formDefId": "",
-                    "options": [
-                      {
-                        "value": "Y",
-                        "label": "Yes"
-                      },
-                      {
-                        "value": "N",
-                        "label": "No"
-                      }
-                    ]
+                "label": "Active",
+                "readonlyLabel": "",
+                "id": "isActive",
+                "options": [
+                  {
+                    "value": "Y",
+                    "label": "Yes",
+                    "grouping": ""
+                  },
+                  {
+                    "value": "N",
+                    "label": "No",
+                    "grouping": ""
                   }
-                }
+                ],
+                "optionsBinder": {
+                  "className": "",
+                  "properties": {}
+                },
+                "value": "Y",
+                "validator": {
+                  "className": "",
+                  "properties": {}
+                },
+                "controlField": "",
+                "workflowVariable": ""
               }
             }
           ]
         }
       ]
     }
-  ],
-  "_metadata": {
-    "generator": "joget-form-generator",
-    "version": "0.1.0",
-    "field_count": 1
-  }
+  ]
 }

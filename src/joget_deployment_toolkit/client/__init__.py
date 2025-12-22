@@ -16,7 +16,9 @@ from .applications import ApplicationOperations
 from .base import BaseClient
 from .data import DataOperations
 from .database import DatabaseOperations
+from .datalists import DatalistOperations
 from .forms import FormOperations
+from .userviews import UserviewOperations
 
 
 class JogetClient(
@@ -25,6 +27,8 @@ class JogetClient(
     DataOperations,
     ApplicationOperations,
     DatabaseOperations,
+    DatalistOperations,
+    UserviewOperations,
 ):
     """
     Main Joget DX API Client.
@@ -36,6 +40,8 @@ class JogetClient(
     - Forms (create, read, update, delete, batch operations)
     - Data Submission (submit records via API, batch operations)
     - Applications (list, get, export, import, batch export)
+    - Datalists (list, get, create, update, delete)
+    - Userviews (list, get, update, menu manipulation)
 
     Initialization Examples:
         >>> # Method 1: Old way (backward compatible)

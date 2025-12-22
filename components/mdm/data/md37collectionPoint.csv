@@ -1,0 +1,11 @@
+code,name,district_code,address,gps_latitude,gps_longitude,contact_person,contact_phone,capacity_per_day,operating_days,is_active
+CP001,Maseru Main Depot,maseru,123 Main Street Maseru,-29.3167,27.4833,John Molefe,+266 5800 0001,200,Mon-Fri,Yes
+CP002,Berea Agricultural Center,berea,Teyateyaneng Road,-29.2000,27.8500,Mary Khabo,+266 5800 0002,150,Mon-Sat,Yes
+CP003,Butha-Buthe Service Point,butha-buthe,Main Road Butha-Buthe,-28.7667,28.2500,Peter Molapo,+266 5800 0003,100,Mon-Fri,Yes
+CP004,Leribe Distribution Center,leribe,Hlotse Town Center,-28.8833,28.0500,Sarah Letsie,+266 5800 0004,180,Mon-Fri,Yes
+CP005,Mafeteng Regional Office,mafeteng,Government Complex,-29.8167,27.2333,Thabo Nteso,+266 5800 0005,120,Mon-Fri,Yes
+CP006,Mohale's Hoek Service Center,mohales-hoek,Church Road,-30.1500,27.4667,Elizabeth Tau,+266 5800 0006,130,Mon-Sat,Yes
+CP007,Mokhotlong Mountain Center,mokhotlong,Town Square,-29.2833,29.0667,David Ramokoena,+266 5800 0007,80,Mon-Fri,Yes
+CP008,Qacha's Nek Distribution Point,qachas-nek,Main Street,-30.1167,28.6833,Grace Mokhele,+266 5800 0008,90,Mon-Fri,Yes
+CP009,Quthing Service Office,quthing,Government Avenue,-30.4000,27.7000,Joseph Makhetha,+266 5800 0009,110,Mon-Fri,Yes
+CP010,Thaba-Tseka Highland Center,thaba-tseka,Central Market,-29.5167,28.6167,Agnes Phiri,+266 5800 0010,70,Mon-Fri,Yes
